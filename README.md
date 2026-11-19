@@ -1,6 +1,5 @@
 <img width="1000" height="652" alt="Hiram_Mate" src="https://github.com/user-attachments/assets/19320e94-30f1-4128-963e-92d4ce126942" />
 
-<br>
 # 📚 HiramMate
 
 A Java-based borrowing and inventory management application for the College of Informatics and Computing Sciences (CICS). Students can search for school items, check availability, request or reserve items, and track due dates, while authorized staff manage inventory, approve requests, record returns, and monitor overdue items and liabilities.
