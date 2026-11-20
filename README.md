@@ -117,3 +117,11 @@ java HiramMate
 - Anthony S. Soreta ([@thonsilitis](https://github.com/thonsilitis)) – Data Handling
 
 **Instructor:** Ms. Fatima Marie P. Agdon, MSCS
+
+<img width="687" height="1024" alt="RENZO" src="https://github.com/user-attachments/assets/d97e9907-2fff-4b1a-bf47-69f9e0bc4cea" />
+
+<img width="687" height="1024" alt="LOCAR" src="https://github.com/user-attachments/assets/f5a74df3-a3ae-4d1a-9f45-75b79ff0575c" />
+
+<img width="687" height="1024" alt="ANTHONY" src="https://github.com/user-attachments/assets/4d6665ee-7135-40fe-8684-b69971e1d261" />
+
+
