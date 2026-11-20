@@ -161,8 +161,6 @@ java HiramMate
 
 <p align="center"> <b>Instructor: Ms. Fatima Marie P. Agdon, MSCS</b> </p>
 
-![Pixel Cat](https://raw.githubusercontent.com/Mayur-Pagote/README_Design_Kit/main/public/Assets/Pixel%20Cat.gif)
-
 
 
 
