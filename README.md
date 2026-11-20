@@ -109,20 +109,57 @@ java HiramMate
 | Week 8 | Documentation and presentation | Final project |
 
 ## Team
+<h2 align="center">DINOROBONG TUBO</h2>
+<p align="center">
+  Team 2 • CS-2102<br>
+  OOP 101 • 1st Semester • AY 2026–2027
+</p>
 
-**Team DINOROBONG TUBO** (Team 2, CS-2102) — OOP 101, 1st Semester, AY 2026–2027
+<table align="center">
+  <tr>
+    <td align="center" width="33%">
+  <img width="1269" height="1240" alt="gian" src="https://github.com/user-attachments/assets/69c29b91-60a7-44fc-9d1e-b0d52709015b" />
+  <br><br>
+      <strong>Gian Carlo M. Arago</strong>
+      <br>
+      <a href="https://github.com/gianaragoworks">
+        @gianaragoworks
+      </a>
+      <br><br>
+      Project Leader
+      <br>
+      Lead Programmer
+    </td>
 
-- Gian Carlo M. Arago ([@gianaragoworks](https://github.com/gianaragoworks)) – Team Leader, Lead Programmer
-- Renzo C. Panes ([@renzocruzpanes](https://github.com/renzocruzpanes)) – System UI Design, Documentation
-- Anthony S. Soreta ([@thonsilitis](https://github.com/thonsilitis)) – Data Handling
+  <td align="center" width="33%">
+  <img width="1295" height="1215" alt="renzo" src="https://github.com/user-attachments/assets/5f76a947-6733-4ff0-b8f7-d798871f2c56" />
+  <br><br>
+      <strong>Renzo C. Panes</strong>
+      <br>
+      <a href="https://github.com/renzocruzpanes">
+        @renzocruzpanes
+      </a>
+      <br><br>
+      System UI Design
+    </td>
 
-**Instructor:** Ms. Fatima Marie P. Agdon, MSCS
+  <td align="center" width="33%">
+  <img width="1284" height="1225" alt=" anthony" src="https://github.com/user-attachments/assets/4fc4a8aa-cbe4-4418-9392-f33d5054e49d" />
+<br><br>
+      <strong>Anthony S. Soreta</strong>
+      <br>
+      <a href="https://github.com/thonsilitis">
+        @thonsilitis
+      </a>
+      <br><br>
+      Data Handling
+    <br>
+    Documentation
+    </td>
+  </tr>
+</table>
 
-<img width="300" height="300" alt="RENZO" src="https://github.com/user-attachments/assets/d97e9907-2fff-4b1a-bf47-69f9e0bc4cea" />
-
-<img width="300" height="300" alt="LOCAR" src="https://github.com/user-attachments/assets/f5a74df3-a3ae-4d1a-9f45-75b79ff0575c" />
-
-<img width="300" height="300" alt="ANTHONY" src="https://github.com/user-attachments/assets/4d6665ee-7135-40fe-8684-b69971e1d261" />
+<p align="center"> <b>Instructor: Ms. Fatima Marie P. Agdon, MSCS</b> </p>
 
 
 
