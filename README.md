@@ -118,10 +118,10 @@ java HiramMate
 
 **Instructor:** Ms. Fatima Marie P. Agdon, MSCS
 
-<img width="687" height="1024" alt="RENZO" src="https://github.com/user-attachments/assets/d97e9907-2fff-4b1a-bf47-69f9e0bc4cea" />
+<img width="200" height="100" alt="RENZO" src="https://github.com/user-attachments/assets/d97e9907-2fff-4b1a-bf47-69f9e0bc4cea" />
 
-<img width="687" height="1024" alt="LOCAR" src="https://github.com/user-attachments/assets/f5a74df3-a3ae-4d1a-9f45-75b79ff0575c" />
+<img width="200" height="100" alt="LOCAR" src="https://github.com/user-attachments/assets/f5a74df3-a3ae-4d1a-9f45-75b79ff0575c" />
 
-<img width="687" height="1024" alt="ANTHONY" src="https://github.com/user-attachments/assets/4d6665ee-7135-40fe-8684-b69971e1d261" />
+<img width="200" height="100" alt="ANTHONY" src="https://github.com/user-attachments/assets/4d6665ee-7135-40fe-8684-b69971e1d261" />
 
 
