@@ -120,6 +120,20 @@ public class StudentDashboardController {
         showMyRequests();
     }
 
+    // LOG OUT
+
+    @FXML
+    private void handleLogout() throws IOException {
+
+        // Clear student session
+        StudentSession.fullName = null;
+        StudentSession.studentId = null;
+        StudentSession.department = null;
+
+        // Return to login screen
+        App.setRoot("primary");
+    }
+
     // ERROR MESSAGE
 
     private void showError(String message) {

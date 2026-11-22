@@ -29,9 +29,14 @@
 
             <!-- BRAND HEADER -->
             <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand">
-                <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="brand-mark">
-                    <Label text="HM" styleClass="brand-mark-text" style="-fx-font-weight: 800; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
+                <StackPane prefWidth="36" prefHeight="36"
+                           minWidth="36" minHeight="36"
+                           styleClass="brand-mark">
+                    <Label text="HM"
+                           styleClass="brand-mark-text"
+                           style="-fx-font-weight: 800; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
                 </StackPane>
+
                 <VBox spacing="1" alignment="CENTER_LEFT">
                     <Label text="HiramMate" styleClass="brand-name"/>
                     <Label text="STUDENT PORTAL" styleClass="brand-caption"/>
@@ -42,7 +47,9 @@
 
             <!-- NAVIGATION MENU -->
             <VBox spacing="6" styleClass="navigation">
-                <Label text="STUDENT MENU" styleClass="menu-heading" mouseTransparent="true"/>
+                <Label text="STUDENT MENU"
+                       styleClass="menu-heading"
+                       mouseTransparent="true"/>
 
                 <Button fx:id="dashboardBtn"
                         text="  ⊞   Dashboard"
@@ -81,23 +88,50 @@
 
             <!-- USER PROFILE FOOTER -->
             <VBox spacing="8" styleClass="profile-container">
-                <Label text="SIGNED IN AS" styleClass="menu-heading" mouseTransparent="true"/>
+
+                <Label text="SIGNED IN AS"
+                       styleClass="menu-heading"
+                       mouseTransparent="true"/>
 
                 <HBox spacing="11" alignment="CENTER_LEFT" styleClass="profile-card">
-                    <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="profile-avatar">
-                        <Label fx:id="profileInitials" text="ST" styleClass="profile-initials"/>
+                    <StackPane prefWidth="36" prefHeight="36"
+                               minWidth="36" minHeight="36"
+                               styleClass="profile-avatar">
+                        <Label fx:id="profileInitials"
+                               text="ST"
+                               styleClass="profile-initials"/>
                     </StackPane>
 
                     <VBox spacing="2" HBox.hgrow="ALWAYS">
                         <Label fx:id="profileName"
                                text="Student Name"
                                styleClass="profile-name"/>
+
                         <Label fx:id="profileDetails"
                                text="Student ID • Department"
                                styleClass="profile-details"
                                wrapText="true"/>
                     </VBox>
                 </HBox>
+
+                <!-- LOG OUT BUTTON -->
+                <Button text="Log Out"
+              onAction="#handleLogout"
+              maxWidth="Infinity"
+              prefHeight="48"
+              minHeight="48"
+              style="-fx-background-color: #FFFFFF;
+               -fx-background-radius: 12;
+               -fx-border-color: #E1E5E9;
+               -fx-border-width: 1.5;
+               -fx-border-radius: 12;
+               -fx-text-fill: #B93838;
+               -fx-font-size: 16px;
+               -fx-font-weight: bold;
+               -fx-alignment: CENTER;
+               -fx-padding: 8 12;
+               -fx-cursor: hand;"/>
+
             </VBox>
 
         </VBox>
@@ -116,6 +150,7 @@
                     <VBox spacing="6" HBox.hgrow="ALWAYS">
                         <Label text="Student Dashboard"
                                styleClass="page-title"/>
+
                         <Label fx:id="welcomeLabel"
                                text="Welcome back! Track your campus equipment borrows and requests."
                                styleClass="page-subtitle"
@@ -139,10 +174,12 @@
                     <VBox spacing="7" HBox.hgrow="ALWAYS">
                         <Label text="Your campus essentials, all in one place."
                                styleClass="banner-title"/>
+
                         <Label text="Browse equipment, manage your requests, and keep track of your borrowed items."
                                styleClass="banner-description"
                                wrapText="true"/>
                     </VBox>
+
                     <Label text="HM"
                            styleClass="banner-mark"/>
                 </HBox>
@@ -247,10 +284,12 @@
                           styleClass="empty-state">
                         <Label text="No active transactions"
                                styleClass="empty-title"/>
+
                         <Label fx:id="activeRecordsMessage"
                                text="Your active borrows and pending requests will appear here."
                                styleClass="empty-message"
                                wrapText="true"/>
+
                         <Button text="Browse available items"
                                 onAction="#showBrowseItems"
                                 styleClass="secondary-button"/>
@@ -336,6 +375,7 @@
                         <Label text="Review your account liabilities and clearance information."
                                styleClass="section-subtitle"/>
                     </VBox>
+
                     <Button text="View liabilities"
                             onAction="#showLiabilities"
                             styleClass="secondary-button"/>
@@ -344,4 +384,5 @@
             </VBox>
         </ScrollPane>
     </center>
+
 </BorderPane>
