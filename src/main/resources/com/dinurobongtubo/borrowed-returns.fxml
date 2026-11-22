@@ -43,7 +43,7 @@
                 <Label text="STUDENT MENU" styleClass="menu-heading" mouseTransparent="true"/>
 
                 <Button fx:id="btnDashboard"
-                        text="  ⊞   Dashboard"
+                        text="  ⊞   Gian"
                         onAction="#showDashboard"
                         maxWidth="Infinity"
                         styleClass="nav-button"/>
