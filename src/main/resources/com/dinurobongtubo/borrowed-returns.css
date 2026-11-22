@@ -1,0 +1,235 @@
+.root {
+    -fx-background-color: #F8F9FA;
+    -fx-font-family: "Arial";
+}
+
+.sidebar {
+    -fx-border-color: transparent rgba(232, 233, 237, 0.4) transparent transparent; /* Subtle semi-transparent divider */
+    -fx-border-color: transparent #E5E7EB transparent transparent;
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 30 18 18 18;
+}
+
+.brand {
+    -fx-padding: 5 8 20 8;
+}
+
+.brand-title {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #B93838;
+}
+
+.brand-subtitle {
+    -fx-font-size: 10px;
+    -fx-text-fill: #9CA3AF;
+    -fx-letter-spacing: 1.5px;
+}
+
+.navigation {
+    -fx-padding: 0 0 0 0;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #596273;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 14;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-pref-width: 214px;
+}
+
+.nav-button:hover {
+    -fx-background-color: #F8F9FA;
+    -fx-text-fill: #B93838;
+}
+
+.nav-button-active {
+    -fx-background-color: #FDF2F2;
+    -fx-text-fill: #B93838;
+    -fx-font-weight: bold;
+}
+
+.profile-card {
+    -fx-background-color: #F8F9FA;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+}
+
+.profile-initials {
+    -fx-background-color: #F8E5E5;
+    -fx-text-fill: #B93838;
+    -fx-font-weight: bold;
+    -fx-padding: 11;
+    -fx-background-radius: 8;
+}
+
+.profile-name {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.profile-details {
+    -fx-font-size: 10px;
+    -fx-text-fill: #6B7280;
+}
+
+.online-indicator {
+    -fx-text-fill: #10B981;
+    -fx-font-size: 10px;
+}
+
+.main-scroll {
+    -fx-background-color: #F8F9FA;
+    -fx-background: #F8F9FA;
+    -fx-border-color: transparent;
+}
+
+.main-content {
+    -fx-padding: 38 42 45 42;
+}
+
+.page-title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.page-subtitle,
+.section-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6B7280;
+}
+
+.section-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.borrow-card,
+.guidelines-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 12;
+    -fx-padding: 21;
+}
+
+.borrow-card {
+    -fx-pref-width: 390px;
+}
+
+.request-id {
+    -fx-font-size: 11px;
+    -fx-text-fill: #9CA3AF;
+}
+
+.status-approved {
+    -fx-background-color: #D1FAE5;
+    -fx-text-fill: #047857;
+    -fx-padding: 6 11;
+    -fx-background-radius: 20;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.status-reserved {
+    -fx-background-color: #DBEAFE;
+    -fx-text-fill: #1D4ED8;
+    -fx-padding: 6 11;
+    -fx-background-radius: 20;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.item-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.item-description {
+    -fx-font-size: 11px;
+    -fx-text-fill: #6B7280;
+}
+
+.date-section {
+    -fx-border-color: #E5E7EB transparent transparent transparent;
+    -fx-padding: 15 0 0 0;
+}
+
+.date-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: #9CA3AF;
+}
+
+.date-value {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #374151;
+}
+
+.primary-button {
+    -fx-background-color: #B93838;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 12;
+    -fx-background-radius: 7;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #9E2D2D;
+}
+
+.secondary-button {
+    -fx-background-color: white;
+    -fx-border-color: #E5E7EB;
+    -fx-text-fill: #4B5563;
+    -fx-font-size: 11px;
+    -fx-padding: 10 12;
+    -fx-background-radius: 7;
+    -fx-border-radius: 7;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #F8F9FA;
+}
+
+.guidelines-card {
+    -fx-padding: 24;
+}
+
+.guideline-item {
+    -fx-background-color: #F8F9FA;
+    -fx-background-radius: 9;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 9;
+    -fx-padding: 15;
+    -fx-pref-width: 220px;
+}
+
+.guideline-number {
+    -fx-text-fill: #B93838;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.guideline-title {
+    -fx-text-fill: #1F2937;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.guideline-description {
+    -fx-text-fill: #6B7280;
+    -fx-font-size: 11px;
+}

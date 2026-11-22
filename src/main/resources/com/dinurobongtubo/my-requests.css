@@ -1,0 +1,212 @@
+.root {
+    -fx-background-color: #F8F9FA;
+    -fx-font-family: "Arial";
+}
+
+/* SIDEBAR */
+.sidebar {
+    -fx-border-color: transparent rgba(232, 233, 237, 0.4) transparent transparent; /* Subtle semi-transparent divider */
+    -fx-border-color: transparent #E5E7EB transparent transparent;
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 28 16 16 16;
+}
+
+.brand-square {
+    -fx-background-color: #B93838;
+    -fx-background-radius: 5;
+}
+
+.brand-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+/* NAVIGATION */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #596273;
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 14;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: #F8F9FA;
+    -fx-text-fill: #1F2937;
+}
+
+.nav-button-active {
+    -fx-background-color: #FDF2F2;
+    -fx-text-fill: #B93838;
+    -fx-font-weight: bold;
+}
+
+/* PROFILE */
+.profile-card {
+    -fx-background-color: #F8F9FA;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 11;
+}
+
+.profile-initials {
+    -fx-background-color: #F9E8E8;
+    -fx-text-fill: #B93838;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 11;
+    -fx-background-radius: 8;
+}
+
+.profile-name {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.profile-details {
+    -fx-font-size: 10px;
+    -fx-text-fill: #6B7280;
+}
+
+.online-indicator {
+    -fx-text-fill: #10B981;
+    -fx-font-size: 10px;
+}
+
+/* MAIN CONTENT */
+.main-scroll {
+    -fx-background-color: #F8F9FA;
+    -fx-background: #F8F9FA;
+    -fx-border-color: transparent;
+}
+
+.main-scroll > .viewport {
+    -fx-background-color: #F8F9FA;
+}
+
+.main-content {
+    -fx-padding: 35 40 40 40;
+}
+
+.page-title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.page-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6B7280;
+}
+
+/* PRIMARY BUTTON */
+.primary-button {
+    -fx-background-color: #B93838;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 11 16;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #9E2D2D;
+}
+
+/* REQUESTS PANEL */
+.requests-panel {
+    -fx-background-color: white;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 11;
+    -fx-background-radius: 11;
+    -fx-padding: 20;
+}
+
+/* FILTER BUTTONS */
+.request-filter {
+    -fx-background-color: transparent;
+    -fx-text-fill: #6B7280;
+    -fx-font-size: 11px;
+    -fx-padding: 9 12;
+    -fx-background-radius: 7;
+    -fx-cursor: hand;
+}
+
+.request-filter:hover {
+    -fx-background-color: #F3F4F6;
+}
+
+.request-filter-active {
+    -fx-background-color: #FDF2F2;
+    -fx-text-fill: #B93838;
+    -fx-font-weight: bold;
+}
+
+/* SEARCH */
+.search-field {
+    -fx-background-color: #F8F9FA;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
+    -fx-padding: 11;
+    -fx-font-size: 12px;
+}
+
+.search-field:focused {
+    -fx-background-color: white;
+    -fx-border-color: #B93838;
+}
+
+/* TABLE */
+.requests-table {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: #F3F4F6;
+    -fx-font-size: 11px;
+}
+
+.requests-table .column-header-background {
+    -fx-background-color: #F8F9FA;
+}
+
+.requests-table .column-header {
+    -fx-background-color: #F8F9FA;
+    -fx-size: 40px;
+    -fx-border-color: transparent transparent #E5E7EB transparent;
+}
+
+.requests-table .column-header .label {
+    -fx-text-fill: #6B7280;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.requests-table .table-cell {
+    -fx-padding: 12 8;
+    -fx-text-fill: #374151;
+    -fx-border-color: transparent transparent #F3F4F6 transparent;
+}
+
+.requests-table .table-row-cell {
+    -fx-background-color: white;
+}
+
+.requests-table .table-row-cell:hover {
+    -fx-background-color: #F9FAFB;
+}
+
+.requests-table .table-row-cell:selected {
+    -fx-background-color: #FDF2F2;
+}
+
+.table-footer {
+    -fx-font-size: 10px;
+    -fx-text-fill: #9CA3AF;
+}

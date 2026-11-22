@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dinurobongtubo.StaffRequestsController"
+            prefWidth="1100.0"
+            prefHeight="700.0"
+            stylesheets="@student-dashboard.css, @staff-requests.css"
+            styleClass="app-background, requests-root">
+
+    <!-- SIDEBAR (Matches StaffDashboard.fxml, StaffItems.fxml & Student Views) -->
+    <left>
+        <VBox prefWidth="255" minWidth="255" styleClass="sidebar">
+
+            <!-- BRAND HEADER -->
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand">
+                <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="brand-mark">
+                    <Label text="HM" styleClass="brand-mark-text" style="-fx-font-weight: 800; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
+                </StackPane>
+                <VBox spacing="1" alignment="CENTER_LEFT">
+                    <Label text="HiramMate" styleClass="brand-name"/>
+                    <Label text="STAFF PORTAL" styleClass="brand-caption"/>
+                </VBox>
+            </HBox>
+
+            <Separator styleClass="sidebar-divider" mouseTransparent="true"/>
+
+            <!-- NAVIGATION MENU -->
+            <VBox spacing="6" styleClass="navigation">
+                <Label text="STAFF MENU" styleClass="menu-heading" mouseTransparent="true"/>
+
+                <Button text="  ⊞   Dashboard"
+                        onAction="#showDashboard"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+
+                <Button text="  ◫   Items"
+                        onAction="#showItems"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+
+                <Button text="  ◷   Requests"
+                        onAction="#showRequests"
+                        maxWidth="Infinity"
+                        styleClass="nav-button, nav-button-active"
+                        style="-fx-background-color: #B93838; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;"/>
+
+                <Button text="  ⇄   Borrowers &amp; Returns"
+                        onAction="#showBorrowersReturns"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+
+                <Button text="  ⚠   Liabilities"
+                        onAction="#showLiabilities"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" mouseTransparent="true"/>
+
+            <Separator styleClass="sidebar-divider" mouseTransparent="true"/>
+
+            <!-- STAFF PROFILE FOOTER -->
+            <VBox spacing="8" styleClass="profile-container">
+                <Label text="SIGNED IN AS" styleClass="menu-heading" mouseTransparent="true"/>
+
+                <HBox spacing="11" alignment="CENTER_LEFT" styleClass="profile-card">
+                    <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="profile-avatar">
+                        <Label text="MS" styleClass="profile-initials"/>
+                    </StackPane>
+
+                    <VBox spacing="2" HBox.hgrow="ALWAYS">
+                        <Label fx:id="staffNameLabel"
+                               text="Staff Member"
+                               styleClass="profile-name"/>
+                        <Label fx:id="staffIdLabel"
+                               text="Staff ID • Active"
+                               styleClass="profile-details"
+                               wrapText="true"/>
+                    </VBox>
+                </HBox>
+
+                <Button text="Log Out"
+                        onAction="#logout"
+                        maxWidth="Infinity"
+                        styleClass="logout-button"/>
+            </VBox>
+
+        </VBox>
+    </left>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <VBox spacing="15.0" styleClass="main-area">
+
+            <padding>
+                <Insets top="24" right="25" bottom="22" left="25"/>
+            </padding>
+
+            <!-- HEADER -->
+            <VBox spacing="5.0">
+                <Label text="Borrow Requests"
+                       styleClass="page-title"/>
+
+                <Label text="Review and manage student borrowing requests."
+                       styleClass="page-subtitle"/>
+            </VBox>
+
+            <Separator/>
+
+            <!-- SEARCH AND FILTER -->
+            <VBox spacing="12.0" styleClass="section-card">
+
+                <Label text="Request Overview"
+                       styleClass="section-title"/>
+
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+
+                    <TextField fx:id="searchField"
+                               promptText="Search request ID, borrower, student ID, or item..."
+                               HBox.hgrow="ALWAYS"
+                               styleClass="search-field"/>
+
+                    <ComboBox fx:id="statusFilter"
+                              prefWidth="145.0"
+                              styleClass="status-filter"/>
+
+                    <Button text="Refresh"
+                            onAction="#refreshRequests"
+                            styleClass="refresh-button"/>
+
+                </HBox>
+
+                <Label fx:id="requestCountLabel"
+                       text="0 request(s) found"
+                       styleClass="item-count"/>
+
+            </VBox>
+
+            <!-- REQUEST TABLE -->
+            <VBox spacing="8.0"
+                  styleClass="section-card"
+                  VBox.vgrow="ALWAYS">
+
+                <Label text="All Borrow Requests"
+                       styleClass="section-title"/>
+
+                <TableView fx:id="requestsTable"
+                           VBox.vgrow="ALWAYS"
+                           styleClass="data-table">
+
+                    <columns>
+
+                        <TableColumn fx:id="requestIdColumn"
+                                     text="Request ID"
+                                     prefWidth="75"/>
+
+                        <TableColumn fx:id="borrowerColumn"
+                                     text="Borrower"
+                                     prefWidth="155"/>
+
+                        <TableColumn fx:id="itemColumn"
+                                     text="Requested Item"
+                                     prefWidth="130"/>
+
+                        <TableColumn fx:id="quantityColumn"
+                                     text="Qty"
+                                     prefWidth="45"/>
+
+                        <TableColumn fx:id="requestDateColumn"
+                                     text="Request Date"
+                                     prefWidth="125"/>
+
+                        <TableColumn fx:id="dueDateColumn"
+                                     text="Due Date"
+                                     prefWidth="90"/>
+
+                        <TableColumn fx:id="statusColumn"
+                                     text="Status"
+                                     prefWidth="90"/>
+
+                    </columns>
+
+                    <placeholder>
+                        <Label text="No borrow requests found."
+                               styleClass="empty-message"/>
+                    </placeholder>
+
+                </TableView>
+
+            </VBox>
+
+            <!-- SELECTED REQUEST DETAILS -->
+            <VBox spacing="10.0" styleClass="section-card">
+
+                <Label fx:id="selectedRequestLabel"
+                       text="No request selected"
+                       styleClass="section-title"/>
+
+                <HBox spacing="25.0">
+
+                    <VBox spacing="7.0" HBox.hgrow="ALWAYS">
+                        <Label text="BORROWER"
+                               styleClass="detail-heading"/>
+
+                        <Label fx:id="detailBorrowerLabel"
+                               text="-"
+                               styleClass="detail-value"/>
+
+                        <Label fx:id="detailStudentIdLabel"
+                               text="-"
+                               styleClass="detail-muted"/>
+
+                        <Label fx:id="detailDepartmentLabel"
+                               text="-"
+                               styleClass="detail-muted"/>
+                    </VBox>
+
+                    <VBox spacing="7.0" HBox.hgrow="ALWAYS">
+                        <Label text="REQUESTED ITEM"
+                               styleClass="detail-heading"/>
+
+                        <Label fx:id="detailItemLabel"
+                               text="-"
+                               styleClass="detail-value"/>
+
+                        <Label fx:id="detailCategoryLabel"
+                               text="-"
+                               styleClass="detail-muted"/>
+
+                        <Label text="Quantity:"
+                               styleClass="detail-heading"/>
+
+                        <Label fx:id="detailQuantityLabel"
+                               text="-"
+                               styleClass="detail-value"/>
+                    </VBox>
+
+                    <VBox spacing="7.0" HBox.hgrow="ALWAYS">
+                        <Label text="SCHEDULE"
+                               styleClass="detail-heading"/>
+
+                        <Label text="Request Date"
+                               styleClass="detail-muted"/>
+
+                        <Label fx:id="detailRequestDateLabel"
+                               text="-"
+                               styleClass="detail-value"/>
+
+                        <Label text="Pickup Date"
+                               styleClass="detail-muted"/>
+
+                        <Label fx:id="detailPickupDateLabel"
+                               text="-"
+                               styleClass="detail-value"/>
+
+                        <Label text="Due Date"
+                               styleClass="detail-muted"/>
+
+                        <Label fx:id="detailDueDateLabel"
+                               text="-"
+                               styleClass="detail-value"/>
+                    </VBox>
+
+                </HBox>
+
+                <Separator/>
+
+                <Label text="PURPOSE"
+                       styleClass="detail-heading"/>
+
+                <Label fx:id="detailPurposeLabel"
+                       text="-"
+                       wrapText="true"
+                       styleClass="detail-value"/>
+
+                <HBox spacing="8.0" alignment="CENTER_LEFT">
+
+                    <Label text="Current Status:"
+                           styleClass="detail-heading"/>
+
+                    <Label fx:id="detailStatusLabel"
+                           text="-"
+                           styleClass="status-value"/>
+
+                    <VBox HBox.hgrow="ALWAYS"/>
+
+                    <Button fx:id="approveButton"
+                            text="Approve Request"
+                            onAction="#approveRequest"
+                            disable="true"
+                            styleClass="approve-button"/>
+
+                    <Button fx:id="rejectButton"
+                            text="Reject Request"
+                            onAction="#rejectRequest"
+                            disable="true"
+                            styleClass="reject-button"/>
+
+                </HBox>
+
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

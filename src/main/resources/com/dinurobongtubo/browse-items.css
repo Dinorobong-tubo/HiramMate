@@ -1,0 +1,251 @@
+.root {
+    -fx-background-color: #F8F9FA;
+    -fx-font-family: "Arial";
+}
+
+/* SIDEBAR */
+.sidebar {
+    -fx-background-color: transparent; /* Changed from white to transparent */
+    -fx-border-color: transparent #E5E7EB transparent transparent;
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 28 16 16 16;
+}
+
+.brand-square {
+    -fx-background-color: #B93838;
+    -fx-background-radius: 8; /* Slightly more rounded to match Dashboard */
+}
+
+.brand-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.brand-subtitle {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #9CA3AF;
+}
+
+.menu-section-label {
+    -fx-font-size: 10.5px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #9CA3AF;
+}
+
+.sidebar-separator .line {
+    -fx-border-color: #E5E7EB;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* SIDEBAR BUTTONS */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #596273;
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 14;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(185, 56, 56, 0.06);
+    -fx-text-fill: #B93838;
+}
+
+/* Highlights in soft red/pink when clicked (:armed) or active (.nav-button-active) */
+.nav-button:armed,
+.nav-button-active {
+    -fx-background-color: #F3E2E2;
+    -fx-text-fill: #B93838;
+    -fx-font-weight: bold;
+}
+
+.nav-button-active:hover {
+    -fx-background-color: #EDD5D5;
+}
+
+/* STUDENT PROFILE */
+.profile-card {
+    -fx-background-color: transparent;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 11;
+}
+
+.profile-initials {
+    -fx-background-color: #F3E2E2;
+    -fx-text-fill: #B93838;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 11;
+    -fx-background-radius: 8;
+}
+
+.profile-name {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.profile-details {
+    -fx-font-size: 10px;
+    -fx-text-fill: #6B7280;
+}
+
+.online-indicator {
+    -fx-text-fill: #10B981;
+    -fx-font-size: 10px;
+}
+
+/* MAIN CONTENT */
+.main-scroll {
+    -fx-background-color: #F8F9FA;
+    -fx-background: #F8F9FA;
+    -fx-border-color: transparent;
+}
+
+.main-scroll > .viewport {
+    -fx-background-color: #F8F9FA;
+}
+
+.main-content {
+    -fx-padding: 35 40 40 40;
+}
+
+.page-title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.page-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6B7280;
+}
+
+/* PRIMARY BUTTON */
+.primary-button {
+    -fx-background-color: #B93838;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 11 16;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #9E2D2D;
+}
+
+/* SEARCH AND FILTER PANEL */
+.filter-panel {
+    -fx-background-color: white;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 11;
+    -fx-background-radius: 11;
+    -fx-padding: 16;
+}
+
+.search-field {
+    -fx-background-color: #F8F9FA;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
+    -fx-padding: 11;
+    -fx-font-size: 12px;
+    -fx-text-fill: #1F2937;
+}
+
+.search-field:focused {
+    -fx-background-color: white;
+    -fx-border-color: #B93838;
+}
+
+/* CATEGORY FILTERS */
+.category-button {
+    -fx-background-color: #F3F4F6;
+    -fx-text-fill: #596273;
+    -fx-font-size: 11px;
+    -fx-padding: 8 13;
+    -fx-background-radius: 7;
+    -fx-cursor: hand;
+}
+
+.category-button:hover {
+    -fx-background-color: #E5E7EB;
+}
+
+.category-active {
+    -fx-background-color: #B93838;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.category-active:hover {
+    -fx-background-color: #9E2D2D;
+}
+
+/* ITEM CARDS */
+.item-card {
+    -fx-background-color: white;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 11;
+    -fx-background-radius: 11;
+    -fx-padding: 17;
+}
+
+.item-card:hover {
+    -fx-border-color: #D1D5DB;
+}
+
+.item-category {
+    -fx-background-color: #F3F4F6;
+    -fx-text-fill: #596273;
+    -fx-font-size: 10px;
+    -fx-padding: 5 9;
+    -fx-background-radius: 5;
+}
+
+.available-badge {
+    -fx-background-color: #D1FAE5;
+    -fx-text-fill: #047857;
+    -fx-font-size: 10px;
+    -fx-padding: 5 9;
+    -fx-background-radius: 20;
+}
+
+.item-name {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.item-description {
+    -fx-font-size: 10px;
+    -fx-text-fill: #6B7280;
+}
+
+.item-stock {
+    -fx-font-size: 10px;
+    -fx-text-fill: #9CA3AF;
+}
+
+.item-button {
+    -fx-background-color: #B93838;
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 10;
+    -fx-background-radius: 7;
+    -fx-cursor: hand;
+}
+
+.item-button:hover {
+    -fx-background-color: #9E2D2D;
+}

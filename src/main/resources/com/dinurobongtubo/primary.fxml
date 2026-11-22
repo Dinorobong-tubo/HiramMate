@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.dinurobongtubo.PrimaryController"
+      prefWidth="1100"
+      prefHeight="700">
+
+    <!-- LEFT PANEL -->
+    <VBox prefWidth="380"
+          spacing="20"
+          style="-fx-background-color: #B51F36;">
+
+        <padding>
+            <Insets top="30" right="30" bottom="30" left="30"/>
+        </padding>
+
+        <Label text="HiramMate"
+               style="-fx-font-size: 22px;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #FFFFFF;"/>
+
+        <VBox spacing="10">
+
+            <Label text="Borrow what you need."
+                   style="-fx-font-size: 28px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #FFFFFF;"/>
+
+            <Label text="Share what you don't."
+                   style="-fx-font-size: 28px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #FFFFFF;"/>
+
+            <Label text="Register once to request school items or donate items other students can use."
+                   wrapText="true"
+                   style="-fx-font-size: 16px;
+                          -fx-text-fill: #FFFFFF;"/>
+
+        </VBox>
+
+        <VBox VBox.vgrow="ALWAYS"/>
+
+        <!-- CIRCULAR LOGO -->
+        <VBox alignment="CENTER" maxWidth="Infinity">
+
+            <ImageView fitWidth="250"
+                       fitHeight="250"
+                       preserveRatio="false">
+
+                <image>
+                    <Image url="@../../images/hiram-mate-logo.png"/>
+                </image>
+
+                <clip>
+                    <Circle centerX="125"
+                            centerY="125"
+                            radius="125"/>
+                </clip>
+
+            </ImageView>
+
+        </VBox>
+
+    </VBox>
+
+
+    <!-- RIGHT PANEL -->
+    <VBox spacing="12"
+          style="-fx-background-color: white;"
+          HBox.hgrow="ALWAYS">
+
+        <padding>
+            <Insets top="35" right="55" bottom="25" left="55"/>
+        </padding>
+
+        <Label text="Create your account"
+               style="-fx-font-size: 30px;
+                      -fx-font-weight: bold;"/>
+
+        <Label text="Tell us about yourself to start borrowing or donating."
+               style="-fx-font-size: 16px;
+                      -fx-text-fill: #747D90;"/>
+
+
+        <!-- FULL NAME -->
+        <Label text="Full Name"
+               style="-fx-font-size: 14px;
+                      -fx-font-weight: bold;"/>
+
+        <TextField fx:id="fullNameField"
+                   promptText="Enter your full name"
+                   prefHeight="42"
+                   maxWidth="Infinity"/>
+
+
+        <!-- STUDENT INFORMATION -->
+        <GridPane hgap="20" vgap="10">
+
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+
+            <children>
+
+                <!-- STUDENT ID -->
+                <VBox spacing="6"
+                      GridPane.columnIndex="0"
+                      GridPane.rowIndex="0">
+
+                    <Label text="Student ID"/>
+
+                    <TextField fx:id="studentIdField"
+                               promptText="25-00000"
+                               prefHeight="42"
+                               maxWidth="Infinity"/>
+
+                </VBox>
+
+                <!-- CONTACT NUMBER -->
+                <VBox spacing="6"
+                      GridPane.columnIndex="1"
+                      GridPane.rowIndex="0">
+
+                    <Label text="Contact Number"/>
+
+                    <TextField fx:id="contactNumberField"
+                               promptText="09XX XXX XXXX"
+                               prefHeight="42"
+                               maxWidth="Infinity"/>
+
+                </VBox>
+
+                <!-- DEPARTMENT -->
+                <VBox spacing="6"
+                      GridPane.columnIndex="0"
+                      GridPane.rowIndex="1">
+
+                    <Label text="Department"/>
+
+                    <ComboBox fx:id="departmentComboBox"
+                              promptText="Select department"
+                              prefHeight="42"
+                              maxWidth="Infinity"
+                              style="-fx-background-color: white;
+                                     -fx-border-color: #C8C8C8;
+                                     -fx-border-radius: 3;
+                                     -fx-background-radius: 3;"/>
+                            
+
+                </VBox>
+
+                <!-- BLOCK -->
+                <VBox spacing="6"
+                      GridPane.columnIndex="1"
+                      GridPane.rowIndex="1">
+
+                    <Label text="Block"/>
+
+                    <TextField fx:id="blockTextField"
+                               promptText="Enter your block"
+                               prefHeight="42"
+                               maxWidth="Infinity"/>
+
+                </VBox>
+
+            </children>
+        </GridPane>
+
+
+        <!-- PASSWORD FIELDS -->
+        <HBox spacing="20">
+
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+
+                <Label text="Password"/>
+
+                <PasswordField fx:id="passwordField"
+                               promptText="Create a password"
+                               prefHeight="42"
+                               maxWidth="Infinity"/>
+
+            </VBox>
+
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+
+                <Label text="Confirm Password"/>
+
+                <PasswordField fx:id="confirmPasswordField"
+                               promptText="Confirm password"
+                               prefHeight="42"
+                               maxWidth="Infinity"/>
+
+            </VBox>
+
+        </HBox>
+
+
+        <!-- BORROW OR DONATE -->
+        <Label text="I want to"
+               style="-fx-font-size: 16px;
+                      -fx-font-weight: bold;"/>
+
+        <HBox spacing="15">
+
+            <!-- BORROW OPTION -->
+            <HBox fx:id="borrowOptionBox"
+                  spacing="10"
+                  alignment="CENTER_LEFT"
+                  prefHeight="75"
+                  HBox.hgrow="ALWAYS"
+                  style="-fx-background-color: #FBE9ED;
+                         -fx-border-color: #AD2638;
+                         -fx-border-width: 2;
+                         -fx-border-radius: 15;
+                         -fx-background-radius: 15;
+                         -fx-padding: 12;">
+
+                <RadioButton fx:id="borrowRadio" selected="true"/>
+
+                <VBox spacing="5">
+
+                    <Label text="Borrow items"
+                           style="-fx-font-size: 17px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #050505;"/>
+
+                    <Label text="Request school items"
+                           style="-fx-font-size: 13px;
+                                  -fx-text-fill: #747D90;"/>
+
+                </VBox>
+
+            </HBox>
+
+
+            <!-- DONATE OPTION -->
+            <HBox fx:id="donateOptionBox"
+                  spacing="10"
+                  alignment="CENTER_LEFT"
+                  prefHeight="75"
+                  HBox.hgrow="ALWAYS"
+                  style="-fx-background-color: white;
+                         -fx-border-color: #DDDDDD;
+                         -fx-border-width: 2;
+                         -fx-border-radius: 15;
+                         -fx-background-radius: 15;
+                         -fx-padding: 12;">
+
+                <RadioButton fx:id="donateRadio"/>
+
+                <VBox spacing="5">
+
+                    <Label text="Donate items"
+                           style="-fx-font-size: 17px;
+                                  -fx-font-weight: bold;"/>
+
+                    <Label text="Give items to other students"
+                           style="-fx-font-size: 13px;
+                                  -fx-text-fill: #747D90;"/>
+
+                </VBox>
+
+            </HBox>
+
+        </HBox>
+
+
+        <!-- CREATE ACCOUNT BUTTON -->
+        <Button fx:id="createAccountButton"
+                text="Create account"
+                onAction="#createAccount"
+                maxWidth="Infinity"
+                prefHeight="48"
+                style="-fx-background-color: #B51F36;
+                       -fx-text-fill: white;
+                       -fx-font-size: 18px;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 12;
+                       -fx-cursor: hand;"/>
+
+
+        <!-- LOGIN LINK -->
+        <HBox alignment="CENTER" spacing="3">
+
+            <Label text="Already registered?"
+                   style="-fx-font-size: 14px;
+                          -fx-text-fill: #747D90;"/>
+
+            <Hyperlink fx:id="loginLink"
+           text="Log in"
+           onAction="#switchToSecondary"
+           style="-fx-font-size: 14px;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #AD2638;"/>
+
+        </HBox>
+
+    </VBox>
+
+</HBox>

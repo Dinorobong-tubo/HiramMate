@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="15"
+      style="-fx-background-color: #F7F7F7;"
+      xmlns="http://javafx.com/javafx/27"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.dinurobongtubo.SecondaryController">
+
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <Label text="HiramMate"
+           style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #B51F36;"/>
+
+    <Label text="Welcome Back!"
+           style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <Label text="Log in to your student account"
+           style="-fx-font-size: 14px; -fx-text-fill: #666666;"/>
+
+    <VBox spacing="7" maxWidth="350">
+        <Label text="Student ID or Staff ID"/>
+        <TextField fx:id="studentIdField"
+                   promptText="Enter your Student ID or Staff ID"
+                   prefHeight="40"/>
+    </VBox>
+
+    <VBox spacing="7" maxWidth="350">
+        <Label text="Password"/>
+        <PasswordField fx:id="passwordField"
+                       promptText="Enter your password"
+                       prefHeight="40"/>
+    </VBox>
+
+    <Button text="Log In"
+            onAction="#login"
+            prefWidth="350"
+            prefHeight="42"
+            style="-fx-background-color: #B51F36; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+    <Hyperlink text="Don't have an account? Register here"
+               onAction="#switchToPrimary"/>
+
+</VBox>

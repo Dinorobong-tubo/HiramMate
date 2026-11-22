@@ -1,0 +1,427 @@
+
+/* GENERAL */
+
+.dashboard-root {
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Arial";
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    -fx-background-color: #F8F9FA;
+    -fx-border-color: transparent #E1E5E9 transparent transparent;
+    -fx-border-width: 0 1 0 0;
+}
+
+.brand-logo {
+    -fx-background-color: #B52325;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-padding: 13px;
+    -fx-background-radius: 12px;
+}
+
+.brand-title {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #202124;
+}
+
+.sidebar-separator {
+    -fx-background-color: #E1E5E9;
+}
+
+/* NAVIGATION */
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #292D32;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 15px 17px;
+    -fx-background-radius: 13px;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: #F1F3F5;
+}
+
+.nav-active {
+    -fx-background-color: #FCEBEB;
+    -fx-text-fill: #B52325;
+}
+
+.nav-active:hover {
+    -fx-background-color: #FCEBEB;
+}
+
+/* STAFF PROFILE */
+
+.staff-profile-card {
+    -fx-background-color: white;
+    -fx-border-color: #DEE2E6;
+    -fx-border-radius: 13px;
+    -fx-background-radius: 13px;
+    -fx-padding: 13px;
+}
+
+.staff-avatar {
+    -fx-background-color: #B52325;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px;
+    -fx-background-radius: 10px;
+}
+
+.staff-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #202124;
+}
+
+.staff-id {
+    -fx-font-size: 11px;
+    -fx-text-fill: #6C757D;
+}
+
+.account-status {
+    -fx-background-color: #E6F4EA;
+    -fx-text-fill: #188038;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 10px;
+    -fx-background-radius: 15px;
+}
+
+.logout-button {
+    -fx-background-color: white;
+    -fx-text-fill: #B52325;
+    -fx-font-weight: bold;
+    -fx-padding: 12px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #E1E5E9;
+    -fx-border-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.logout-button:hover {
+    -fx-background-color: #FCEBEB;
+}
+
+/* MAIN AREA */
+
+.main-area {
+    -fx-background-color: white;
+}
+
+.page-title {
+    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #202124;
+}
+
+.search-field {
+    -fx-background-color: #F1F3F5;
+    -fx-background-radius: 25px;
+    -fx-border-color: transparent;
+    -fx-padding: 13px 18px;
+    -fx-font-size: 13px;
+    -fx-prompt-text-fill: #7A838C;
+}
+
+/* SUMMARY CARDS */
+
+.stats-row {
+    -fx-alignment: CENTER;
+}
+
+.stat-card {
+    -fx-background-color: white;
+    -fx-border-color: #DEE2E6;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 18px;
+    -fx-spacing: 12px;
+    -fx-min-height: 105px;
+}
+
+.stat-danger {
+    -fx-background-color: #FFF3F3;
+    -fx-border-color: #F5BFC3;
+}
+
+.stat-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #737D87;
+}
+
+.stat-value {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #202124;
+}
+
+.danger-value {
+    -fx-text-fill: #B52325;
+}
+
+/* SECTIONS */
+
+.section {
+    -fx-background-color: transparent;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #202124;
+}
+
+.section-hint {
+    -fx-font-size: 11px;
+    -fx-text-fill: #7A838C;
+}
+
+.live-indicator {
+    -fx-text-fill: #188038;
+    -fx-font-size: 17px;
+}
+
+/* REQUEST TABLE */
+
+.requests-table {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-background-radius: 8px;
+}
+
+.requests-table .column-header-background {
+    -fx-background-color: #F1F3F5;
+    -fx-background-radius: 10px;
+}
+
+.requests-table .column-header {
+    -fx-background-color: #F1F3F5;
+    -fx-size: 39px;
+    -fx-border-color: transparent;
+}
+
+.requests-table .column-header .label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6C757D;
+}
+
+.requests-table .table-cell {
+    -fx-font-size: 12px;
+    -fx-text-fill: #343A40;
+    -fx-padding: 13px 9px;
+    -fx-border-color: transparent transparent #E9ECEF transparent;
+}
+
+.requests-table .table-row-cell {
+    -fx-background-color: white;
+}
+
+.requests-table .table-row-cell:filled:hover {
+    -fx-background-color: #FFF8F8;
+}
+
+.requests-table .table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+/* STATUS BADGES */
+
+.status-pending {
+    -fx-background-color: #FFF5DB;
+    -fx-text-fill: #B96900;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 13px;
+    -fx-background-radius: 20px;
+}
+
+.status-approved {
+    -fx-background-color: #E5F4E9;
+    -fx-text-fill: #188038;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 13px;
+    -fx-background-radius: 20px;
+}
+
+.status-reserved {
+    -fx-background-color: #E7F0FF;
+    -fx-text-fill: #1769D2;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 13px;
+    -fx-background-radius: 20px;
+}
+
+.status-overdue {
+    -fx-background-color: #FCE8E6;
+    -fx-text-fill: #C5221F;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 13px;
+    -fx-background-radius: 20px;
+}
+
+.status-other {
+    -fx-background-color: #F1F3F5;
+    -fx-text-fill: #495057;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 13px;
+    -fx-background-radius: 20px;
+}
+
+/* REQUEST ACTION BUTTONS */
+
+.approve-button {
+    -fx-background-color: #B52325;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 13px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.approve-button:hover {
+    -fx-background-color: #941D20;
+}
+
+.reject-button {
+    -fx-background-color: white;
+    -fx-text-fill: #B52325;
+    -fx-border-color: #B52325;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 12px;
+    -fx-cursor: hand;
+}
+
+.reject-button:hover {
+    -fx-background-color: #FCEBEB;
+}
+
+.outline-button {
+    -fx-background-color: white;
+    -fx-text-fill: #343A40;
+    -fx-border-color: #CED4DA;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 13px;
+    -fx-cursor: hand;
+}
+
+.outline-button:hover {
+    -fx-background-color: #F1F3F5;
+}
+
+/* ACTIVE BORROWER CARDS */
+
+.borrower-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.borrower-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.borrower-container {
+    -fx-padding: 2px 2px 8px 2px;
+}
+
+.borrower-card {
+    -fx-background-color: white;
+    -fx-border-color: #DEE2E6;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+    -fx-padding: 16px;
+    -fx-pref-width: 350px;
+    -fx-min-width: 300px;
+    -fx-spacing: 12px;
+}
+
+.borrower-card-overdue {
+    -fx-background-color: #FFF3F3;
+    -fx-border-color: #F5BFC3;
+}
+
+.borrower-card-name {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #202124;
+}
+
+.borrower-card-details {
+    -fx-font-size: 12px;
+    -fx-text-fill: #737D87;
+}
+
+.borrower-card-item {
+    -fx-font-size: 13px;
+    -fx-text-fill: #343A40;
+}
+
+.borrower-card-status {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 7px 11px;
+    -fx-background-radius: 18px;
+}
+
+.borrower-status-active {
+    -fx-background-color: #E7F0FF;
+    -fx-text-fill: #1769D2;
+}
+
+.borrower-status-overdue {
+    -fx-background-color: #FCE8E6;
+    -fx-text-fill: #C5221F;
+}
+
+.inspect-button {
+    -fx-background-color: white;
+    -fx-text-fill: #343A40;
+    -fx-border-color: #CED4DA;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 12px;
+    -fx-cursor: hand;
+}
+
+.return-button {
+    -fx-background-color: #B52325;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 9px 15px;
+    -fx-cursor: hand;
+}
+
+.return-button:hover {
+    -fx-background-color: #941D20;
+}
+
+.empty-message {
+    -fx-font-size: 12px;
+    -fx-text-fill: #8A929A;
+}
+
+.data-table .column-header-background .filler {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}

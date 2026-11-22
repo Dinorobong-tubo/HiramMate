@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane
+    xmlns="http://javafx.com/javafx/27"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.dinurobongtubo.BorrowedReturnsController"
+    stylesheets="@student-dashboard.css, @borrowed-returns.css"
+    prefWidth="1100"
+    prefHeight="700"
+    styleClass="app-background">
+
+    <!-- SIDEBAR (100% Identical to BrowseItems.fxml & StudentDashboard.fxml) -->
+    <left>
+        <VBox prefWidth="255" minWidth="255" styleClass="sidebar">
+
+            <!-- BRAND HEADER -->
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand">
+                <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="brand-mark">
+                    <Label text="HM" styleClass="brand-mark-text" style="-fx-font-weight: 800; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
+                </StackPane>
+                <VBox spacing="1" alignment="CENTER_LEFT">
+                    <Label text="HiramMate" styleClass="brand-name"/>
+                    <Label text="STUDENT PORTAL" styleClass="brand-caption"/>
+                </VBox>
+            </HBox>
+
+            <Separator styleClass="sidebar-divider" mouseTransparent="true"/>
+
+            <!-- NAVIGATION MENU -->
+            <VBox spacing="6" styleClass="navigation">
+                <Label text="STUDENT MENU" styleClass="menu-heading" mouseTransparent="true"/>
+
+                <Button fx:id="btnDashboard"
+                        text="  ⊞   Dashboard"
+                        onAction="#showDashboard"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+
+                <Button fx:id="btnBrowseItems"
+                        text="  ◫   Browse Items"
+                        onAction="#showBrowseItems"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+
+                <Button fx:id="btnMyRequests"
+                        text="  ◷   My Requests"
+                        onAction="#showMyRequests"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+
+                <Button fx:id="btnBorrowedReturns"
+                        text="  ⇄   Borrowed &amp; Returns"
+                        maxWidth="Infinity"
+                        styleClass="nav-button, nav-button-active"
+                        style="-fx-background-color: #B93838; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;"/>
+
+                <Button fx:id="btnLiabilities"
+                        text="  ⚠   Liabilities"
+                        onAction="#showLiabilities"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" mouseTransparent="true"/>
+
+            <Separator styleClass="sidebar-divider" mouseTransparent="true"/>
+
+            <!-- USER PROFILE FOOTER -->
+            <VBox spacing="8" styleClass="profile-container">
+                <Label text="SIGNED IN AS" styleClass="menu-heading" mouseTransparent="true"/>
+
+                <HBox spacing="11" alignment="CENTER_LEFT" styleClass="profile-card">
+                    <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="profile-avatar">
+                        <Label fx:id="profileInitials" text="AS" styleClass="profile-initials"/>
+                    </StackPane>
+
+                    <VBox spacing="2" HBox.hgrow="ALWAYS">
+                        <Label fx:id="profileName"
+                               text="Student Name"
+                               styleClass="profile-name"/>
+                        <Label fx:id="profileDetails"
+                               text="Student ID • Department"
+                               styleClass="profile-details"
+                               wrapText="true"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </left>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <ScrollPane fitToWidth="true"
+                    styleClass="main-scroll"
+                    hbarPolicy="NEVER">
+
+            <VBox spacing="25" styleClass="main-content">
+
+                <!-- PAGE HEADER -->
+                <VBox spacing="6">
+                    <Label text="Borrowed &amp; Returns"
+                           styleClass="page-title"/>
+
+                    <Label text="Manage equipment currently in your possession and view return instructions."
+                           styleClass="page-subtitle"/>
+                </VBox>
+
+                <!-- SECTION HEADER -->
+                <VBox spacing="5">
+                    <Label text="Your current equipment"
+                           styleClass="section-title"/>
+
+                    <Label text="View your borrowing status and important return dates."
+                           styleClass="section-subtitle"/>
+                </VBox>
+
+                <!-- BORROWED ITEM CARDS -->
+                <GridPane fx:id="borrowedItemsGrid" hgap="16" vgap="16">
+
+                    <!-- CARD 1 -->
+                    <VBox GridPane.columnIndex="0"
+                          GridPane.rowIndex="0"
+                          styleClass="borrow-card"
+                          spacing="14">
+
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="REQ-1082"
+                                   styleClass="request-id"/>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <Label text="Approved"
+                                   styleClass="status-approved"/>
+                        </HBox>
+
+                        <VBox spacing="5">
+                            <Label text="Scientific Calculator"
+                                   styleClass="item-title"/>
+
+                            <Label text="Electronics • MATH 103 Differential Calculus Exam"
+                                   styleClass="item-description"/>
+                        </VBox>
+
+                        <HBox spacing="25" styleClass="date-section">
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Pickup date"
+                                       styleClass="date-label"/>
+                                <Label text="October 5"
+                                       styleClass="date-value"/>
+                            </VBox>
+
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Return due date"
+                                       styleClass="date-label"/>
+                                <Label text="October 9"
+                                       styleClass="date-value"/>
+                            </VBox>
+                        </HBox>
+
+                        <HBox spacing="10">
+                            <Button text="Request 2-day extension"
+                                    onAction="#showComingSoon"
+                                    styleClass="primary-button"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+
+                            <Button text="Pass QR"
+                                    onAction="#showComingSoon"
+                                    styleClass="secondary-button"/>
+                        </HBox>
+
+                    </VBox>
+
+                    <!-- CARD 2 -->
+                    <VBox GridPane.columnIndex="1"
+                          GridPane.rowIndex="0"
+                          styleClass="borrow-card"
+                          spacing="14">
+
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="REQ-1089"
+                                   styleClass="request-id"/>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <Label text="Reserved"
+                                   styleClass="status-reserved"/>
+                        </HBox>
+
+                        <VBox spacing="5">
+                            <Label text="Lab Gown"
+                                   styleClass="item-title"/>
+
+                            <Label text="Laboratory • CHEM 101 Organic Chemistry Lab"
+                                   styleClass="item-description"/>
+                        </VBox>
+
+                        <HBox spacing="25" styleClass="date-section">
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Pickup date"
+                                       styleClass="date-label"/>
+                                <Label text="October 8"
+                                       styleClass="date-value"/>
+                            </VBox>
+
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Return due date"
+                                       styleClass="date-label"/>
+                                <Label text="October 11"
+                                       styleClass="date-value"/>
+                            </VBox>
+                        </HBox>
+
+                        <HBox spacing="10">
+                            <Button text="Cancel reservation"
+                                    onAction="#showComingSoon"
+                                    styleClass="secondary-button"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+
+                           
+                        </HBox>
+
+                    </VBox>
+
+                </GridPane>
+
+                <!-- RETURN GUIDELINES -->
+                <VBox spacing="17" styleClass="guidelines-card">
+
+                    <VBox spacing="5">
+                        <Label text="Campus Equipment Return Guidelines"
+                               styleClass="section-title"/>
+
+                        <Label text="Please follow these steps when returning borrowed equipment."
+                               styleClass="section-subtitle"/>
+                    </VBox>
+
+                    <GridPane hgap="14" vgap="14">
+
+                        <VBox GridPane.columnIndex="0"
+                              GridPane.rowIndex="0"
+                              styleClass="guideline-item"
+                              spacing="8">
+
+                            <Label text="01"
+                                   styleClass="guideline-number"/>
+
+                            <Label text="Return Location"
+                                   styleClass="guideline-title"/>
+
+                            <Label text="Proceed to the HiramMate Property Custodian Desk (Room 104, Main Academic Building) before 5:00 PM on your due date."
+                                   styleClass="guideline-description"
+                                   wrapText="true"/>
+                        </VBox>
+
+                        <VBox GridPane.columnIndex="1"
+                              GridPane.rowIndex="0"
+                              styleClass="guideline-item"
+                              spacing="8">
+
+                            <Label text="02"
+                                   styleClass="guideline-number"/>
+
+                            <Label text="Condition Inspection"
+                                   styleClass="guideline-title"/>
+
+                            <Label text="Ensure all cables, cases, and accessories are complete. Staff will scan your student ID to record the return."
+                                   styleClass="guideline-description"
+                                   wrapText="true"/>
+                        </VBox>
+
+                        <VBox GridPane.columnIndex="2"
+                              GridPane.rowIndex="0"
+                              styleClass="guideline-item"
+                              spacing="8">
+
+                            <Label text="03"
+                                   styleClass="guideline-number"/>
+
+                            <Label text="Extension Requests"
+                                   styleClass="guideline-title"/>
+
+                            <Label text="Need more time? Submit a 2-day extension request at least 12 hours before your scheduled due date."
+                                   styleClass="guideline-description"
+                                   wrapText="true"/>
+                        </VBox>
+
+                    </GridPane>
+
+                </VBox>
+
+            </VBox>
+
+        </ScrollPane>
+    </center>
+
+</BorderPane>
