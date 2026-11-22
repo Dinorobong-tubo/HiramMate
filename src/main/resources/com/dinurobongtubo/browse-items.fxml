@@ -96,6 +96,7 @@
                                wrapText="true"/>
                     </VBox>
                 </HBox>
+                
             </VBox>
 
         </VBox>
@@ -181,3 +182,4 @@
     </center>
 
 </BorderPane>
+
