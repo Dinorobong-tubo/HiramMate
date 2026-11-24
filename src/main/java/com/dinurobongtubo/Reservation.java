@@ -1,17 +1,20 @@
-package com;
-
-import com.dinurobongtubo.Item;
-import com.dinurobongtubo.Student;
+package com.dinurobongtubo;
 
 public class Reservation {
-      private String reservationId;
+
+    private String reservationId;
     private Student student;
     private Item item;
     private String reservationDate;
     private String status;
 
-    public Reservation(String reservationId, Student student,
-                       Item item, String reservationDate, String status) {
+    public Reservation(
+            String reservationId,
+            Student student,
+            Item item,
+            String reservationDate,
+            String status
+    ) {
 
         this.reservationId = reservationId;
         this.student = student;

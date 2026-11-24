@@ -1,6 +1,8 @@
-
 package com.dinurobongtubo;
 
+import java.awt.Color;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -11,6 +13,18 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,67 +37,40 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 
 public class LiabilitiesController {
 
-    @FXML
-    private Label profileInitials;
+    @FXML private Label profileInitials;
+    @FXML private Label profileName;
+    @FXML private Label profileDetails;
 
-    @FXML
-    private Label profileName;
+    @FXML private Label totalOutstandingLabel;
+    @FXML private Label pendingChargesLabel;
+    @FXML private Label settledLabel;
 
-    @FXML
-    private Label profileDetails;
+    @FXML private Label noticeDescription;
+    @FXML private Label recordsFooter;
 
-    @FXML
-    private Label totalOutstandingLabel;
+    @FXML private ComboBox<String> statusFilter;
+    @FXML private TextField searchField;
 
-    @FXML
-    private Label pendingChargesLabel;
+    @FXML private TableView<LiabilityRow> liabilitiesTable;
 
-    @FXML
-    private Label settledLabel;
-
-    @FXML
-    private Label noticeDescription;
-
-    @FXML
-    private Label recordsFooter;
-
-    @FXML
-    private ComboBox<String> statusFilter;
-
-    @FXML
-    private TextField searchField;
-
-    @FXML
-    private TableView<LiabilityRow> liabilitiesTable;
-
-    @FXML
-    private TableColumn<LiabilityRow, String> referenceColumn;
-
-    @FXML
-    private TableColumn<LiabilityRow, String> itemColumn;
-
-    @FXML
-    private TableColumn<LiabilityRow, String> reasonColumn;
-
-    @FXML
-    private TableColumn<LiabilityRow, String> dateColumn;
-
-    @FXML
-    private TableColumn<LiabilityRow, String> amountColumn;
-
-    @FXML
-    private TableColumn<LiabilityRow, String> statusColumn;
+    @FXML private TableColumn<LiabilityRow, String> referenceColumn;
+    @FXML private TableColumn<LiabilityRow, String> itemColumn;
+    @FXML private TableColumn<LiabilityRow, String> reasonColumn;
+    @FXML private TableColumn<LiabilityRow, String> dateColumn;
+    @FXML private TableColumn<LiabilityRow, String> amountColumn;
+    @FXML private TableColumn<LiabilityRow, String> statusColumn;
 
     private final ObservableList<LiabilityRow> liabilityList =
-        FXCollections.observableArrayList();
+            FXCollections.observableArrayList();
 
     private FilteredList<LiabilityRow> filteredLiabilities;
 
     private final DateTimeFormatter dateFormatter =
-        DateTimeFormatter.ofPattern("MMM d, yyyy");
+            DateTimeFormatter.ofPattern("MMM d, yyyy");
 
     // ==========================================
     // INITIALIZE
@@ -91,12 +78,10 @@ public class LiabilitiesController {
 
     @FXML
     public void initialize() {
-
         loadProfile();
         setupStatusFilter();
         setupTableColumns();
         setupSearchAndFilter();
-
         loadLiabilities();
     }
 
@@ -115,24 +100,26 @@ public class LiabilitiesController {
         profileName.setText(name);
 
         String[] nameParts = name.trim().split("\\s+");
-        String initials = "";
+        StringBuilder initials = new StringBuilder();
 
         for (String part : nameParts) {
             if (!part.isEmpty()) {
-                initials += part.charAt(0);
+                initials.append(part.charAt(0));
             }
         }
 
-        if (initials.length() > 2) {
-            initials = initials.substring(0, 2);
+        String result = initials.toString();
+
+        if (result.length() > 2) {
+            result = result.substring(0, 2);
         }
 
-        profileInitials.setText(initials.toUpperCase());
+        profileInitials.setText(result.toUpperCase());
 
         String studentId = StudentSession.studentId;
 
         profileDetails.setText(
-            studentId != null ? studentId : "No Student ID"
+                studentId != null ? studentId : "No Student ID"
         );
     }
 
@@ -145,10 +132,10 @@ public class LiabilitiesController {
         statusFilter.getItems().clear();
 
         statusFilter.getItems().addAll(
-            "All statuses",
-            "Pending",
-            "Outstanding",
-            "Settled"
+                "All statuses",
+                "Pending",
+                "Outstanding",
+                "Settled"
         );
 
         statusFilter.setValue("All statuses");
@@ -161,27 +148,27 @@ public class LiabilitiesController {
     private void setupTableColumns() {
 
         referenceColumn.setCellValueFactory(
-            new PropertyValueFactory<>("reference")
+                new PropertyValueFactory<>("reference")
         );
 
         itemColumn.setCellValueFactory(
-            new PropertyValueFactory<>("item")
+                new PropertyValueFactory<>("item")
         );
 
         reasonColumn.setCellValueFactory(
-            new PropertyValueFactory<>("reason")
+                new PropertyValueFactory<>("reason")
         );
 
         dateColumn.setCellValueFactory(
-            new PropertyValueFactory<>("date")
+                new PropertyValueFactory<>("date")
         );
 
         amountColumn.setCellValueFactory(
-            new PropertyValueFactory<>("amount")
+                new PropertyValueFactory<>("amount")
         );
 
         statusColumn.setCellValueFactory(
-            new PropertyValueFactory<>("status")
+                new PropertyValueFactory<>("status")
         );
     }
 
@@ -192,16 +179,16 @@ public class LiabilitiesController {
     private void setupSearchAndFilter() {
 
         filteredLiabilities =
-            new FilteredList<>(liabilityList, row -> true);
+                new FilteredList<>(liabilityList, row -> true);
 
         liabilitiesTable.setItems(filteredLiabilities);
 
         searchField.textProperty().addListener(
-            (observable, oldValue, newValue) -> applyFilters()
+                (observable, oldValue, newValue) -> applyFilters()
         );
 
         statusFilter.valueProperty().addListener(
-            (observable, oldValue, newValue) -> applyFilters()
+                (observable, oldValue, newValue) -> applyFilters()
         );
     }
 
@@ -218,29 +205,30 @@ public class LiabilitiesController {
         }
 
         final String search = searchText.toLowerCase().trim();
-
         String selectedStatus = statusFilter.getValue();
 
         filteredLiabilities.setPredicate(row -> {
 
-            // STATUS FILTER
-
             boolean matchesStatus =
-                selectedStatus == null ||
-                selectedStatus.equals("All statuses") ||
-                row.getStatus().equalsIgnoreCase(selectedStatus);
-
-            // SEARCH FILTER
+                    selectedStatus == null ||
+                    selectedStatus.equals("All statuses") ||
+                    (row.getStatus() != null &&
+                     row.getStatus().equalsIgnoreCase(selectedStatus));
 
             boolean matchesSearch =
-                search.isEmpty() ||
-                row.getReference().toLowerCase().contains(search) ||
-                row.getItem().toLowerCase().contains(search);
+                    search.isEmpty() ||
+                    containsIgnoreCase(row.getReference(), search) ||
+                    containsIgnoreCase(row.getItem(), search);
 
             return matchesStatus && matchesSearch;
         });
 
         updateRecordsFooter();
+    }
+
+    private boolean containsIgnoreCase(String value, String search) {
+        return value != null &&
+                value.toLowerCase().contains(search);
     }
 
     // ==========================================
@@ -252,32 +240,31 @@ public class LiabilitiesController {
         liabilityList.clear();
 
         if (StudentSession.studentId == null ||
-            StudentSession.studentId.isBlank()) {
+                StudentSession.studentId.isBlank()) {
 
             showAlert(
-                Alert.AlertType.WARNING,
-                "No Student Session",
-                "Unable to identify the currently logged-in student."
+                    Alert.AlertType.WARNING,
+                    "No Student Session",
+                    "Unable to identify the currently logged-in student."
             );
 
             return;
         }
 
         String sql =
-            "SELECT l.liability_id, l.reason, l.amount, " +
-            "l.status, l.created_at, " +
-            "COALESCE(i.item_name, 'General Liability') AS item_name " +
-            "FROM liabilities l " +
-            "INNER JOIN users u ON l.user_id = u.user_id " +
-            "LEFT JOIN items i ON l.item_id = i.item_id " +
-            "WHERE u.student_id = ? " +
-            "ORDER BY l.created_at DESC";
+                "SELECT l.liability_id, l.reason, l.amount, " +
+                "l.status, l.created_at, " +
+                "COALESCE(i.item_name, 'General Liability') AS item_name " +
+                "FROM liabilities l " +
+                "INNER JOIN users u ON l.user_id = u.user_id " +
+                "LEFT JOIN items i ON l.item_id = i.item_id " +
+                "WHERE u.student_id = ? " +
+                "ORDER BY l.created_at DESC";
 
-        try (Connection connection =
-                 DatabaseConnection.getConnection();
-
-             PreparedStatement statement =
-                 connection.prepareStatement(sql)) {
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
 
             statement.setString(1, StudentSession.studentId);
 
@@ -289,102 +276,81 @@ public class LiabilitiesController {
 
                 while (result.next()) {
 
-                    int liabilityId =
-                        result.getInt("liability_id");
+                    int liabilityId = result.getInt("liability_id");
 
-                    String reason =
-                        result.getString("reason");
+                    String reason = result.getString("reason");
+                    String item = result.getString("item_name");
 
-                    String item =
-                        result.getString("item_name");
-
-                    BigDecimal amount =
-                        result.getBigDecimal("amount");
+                    BigDecimal amount = result.getBigDecimal("amount");
 
                     if (amount == null) {
                         amount = BigDecimal.ZERO;
                     }
 
-                    String status =
-                        result.getString("status");
+                    String status = result.getString("status");
 
-                    Timestamp timestamp =
-                        result.getTimestamp("created_at");
+                    Timestamp timestamp = result.getTimestamp("created_at");
 
                     String formattedDate = "Not available";
 
                     if (timestamp != null) {
-
-                        LocalDateTime dateTime =
-                            timestamp.toLocalDateTime();
-
                         formattedDate =
-                            dateTime.format(dateFormatter);
+                                timestamp.toLocalDateTime()
+                                        .format(dateFormatter);
                     }
 
                     String reference =
-                        String.format("LIAB-%04d", liabilityId);
-
-                    String formattedAmount =
-                        formatCurrency(amount);
+                            String.format("LIAB-%04d", liabilityId);
 
                     LiabilityRow row = new LiabilityRow(
-                        reference,
-                        item,
-                        reason,
-                        formattedDate,
-                        formattedAmount,
-                        status
+                            reference,
+                            item,
+                            reason,
+                            formattedDate,
+                            formatCurrency(amount),
+                            status
                     );
 
                     liabilityList.add(row);
 
-                    // CALCULATE SUMMARY AMOUNTS
-
                     if (status != null) {
 
                         if (status.equalsIgnoreCase("Pending") ||
-                            status.equalsIgnoreCase("Outstanding")) {
+                                status.equalsIgnoreCase("Outstanding")) {
 
                             totalOutstanding =
-                                totalOutstanding.add(amount);
+                                    totalOutstanding.add(amount);
                         }
 
                         if (status.equalsIgnoreCase("Pending")) {
-
                             pendingCharges =
-                                pendingCharges.add(amount);
+                                    pendingCharges.add(amount);
                         }
 
                         if (status.equalsIgnoreCase("Settled")) {
-
                             settledAmount =
-                                settledAmount.add(amount);
+                                    settledAmount.add(amount);
                         }
                     }
                 }
 
-                // UPDATE SUMMARY CARDS
-
                 totalOutstandingLabel.setText(
-                    formatCurrency(totalOutstanding)
+                        formatCurrency(totalOutstanding)
                 );
 
                 pendingChargesLabel.setText(
-                    formatCurrency(pendingCharges)
+                        formatCurrency(pendingCharges)
                 );
 
                 settledLabel.setText(
-                    formatCurrency(settledAmount)
+                        formatCurrency(settledAmount)
                 );
 
-                // UPDATE PAYMENT NOTICE
-
                 noticeDescription.setText(
-                    "You currently have an outstanding balance of " +
-                    formatCurrency(totalOutstanding) +
-                    ". Please coordinate with the property office " +
-                    "for verification and settlement."
+                        "You currently have an outstanding balance of " +
+                        formatCurrency(totalOutstanding) +
+                        ". Please coordinate with the property office " +
+                        "for verification and settlement."
                 );
 
                 applyFilters();
@@ -392,11 +358,13 @@ public class LiabilitiesController {
 
         } catch (SQLException e) {
 
+            e.printStackTrace();
+
             showAlert(
-                Alert.AlertType.ERROR,
-                "Database Error",
-                "Unable to load liability records.\n\n" +
-                e.getMessage()
+                    Alert.AlertType.ERROR,
+                    "Database Error",
+                    "Unable to load liability records.\n\n" +
+                    e.getMessage()
             );
         }
     }
@@ -407,10 +375,12 @@ public class LiabilitiesController {
 
     private void updateRecordsFooter() {
 
-        int count = filteredLiabilities.size();
+        if (filteredLiabilities == null) {
+            return;
+        }
 
         recordsFooter.setText(
-            "Showing " + count + " record(s)"
+                "Showing " + filteredLiabilities.size() + " record(s)"
         );
     }
 
@@ -421,10 +391,384 @@ public class LiabilitiesController {
     private String formatCurrency(BigDecimal amount) {
 
         return String.format(
-            Locale.US,
-            "₱%,.2f",
-            amount
+                Locale.US,
+                "₱%,.2f",
+                amount
         );
+    }
+
+    // ==========================================
+    // DOWNLOAD LIABILITY STATEMENT
+    // ==========================================
+
+    @FXML
+    private void downloadStatement() {
+
+        if (StudentSession.studentId == null ||
+                StudentSession.studentId.isBlank()) {
+
+            showAlert(
+                    Alert.AlertType.WARNING,
+                    "Student Not Found",
+                    "Unable to identify the currently logged-in student."
+            );
+
+            return;
+        }
+
+        if (liabilityList.isEmpty()) {
+
+            showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "No Liability Records",
+                    "You currently have no liability records to download."
+            );
+
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+
+        fileChooser.setTitle("Save My Liability Statement");
+
+        String safeStudentId =
+                StudentSession.studentId.replaceAll(
+                        "[^a-zA-Z0-9_-]",
+                        "_"
+                );
+
+        fileChooser.setInitialFileName(
+                "My_Liability_Statement_" + safeStudentId + ".pdf"
+        );
+
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter(
+                        "PDF Files (*.pdf)",
+                        "*.pdf"
+                )
+        );
+
+        File file = fileChooser.showSaveDialog(
+                liabilitiesTable.getScene().getWindow()
+        );
+
+        if (file == null) {
+            return;
+        }
+
+        if (!file.getName().toLowerCase().endsWith(".pdf")) {
+            file = new File(file.getAbsolutePath() + ".pdf");
+        }
+
+        BigDecimal totalRecorded = BigDecimal.ZERO;
+        BigDecimal totalOutstanding = BigDecimal.ZERO;
+
+        for (LiabilityRow row : liabilityList) {
+
+            BigDecimal amount = parseAmount(row.getAmount());
+
+            totalRecorded = totalRecorded.add(amount);
+
+            if ("Pending".equalsIgnoreCase(row.getStatus()) ||
+                    "Outstanding".equalsIgnoreCase(row.getStatus())) {
+
+                totalOutstanding =
+                        totalOutstanding.add(amount);
+            }
+        }
+
+        Document document = new Document(
+                PageSize.A4.rotate(),
+                36,
+                36,
+                36,
+                36
+        );
+
+        try (FileOutputStream output = new FileOutputStream(file)) {
+
+            PdfWriter.getInstance(document, output);
+
+            document.open();
+
+            Font titleFont = FontFactory.getFont(
+                    FontFactory.HELVETICA,
+                    20,
+                    Font.BOLD
+            );
+
+            Font headingFont = FontFactory.getFont(
+                    FontFactory.HELVETICA,
+                    12,
+                    Font.BOLD
+            );
+
+            Font normalFont = FontFactory.getFont(
+                    FontFactory.HELVETICA,
+                    10,
+                    Font.NORMAL
+            );
+
+            Font smallFont = FontFactory.getFont(
+                    FontFactory.HELVETICA,
+                    9,
+                    Font.NORMAL
+            );
+
+            Font headerFont = FontFactory.getFont(
+                    FontFactory.HELVETICA,
+                    9,
+                    Font.BOLD,
+                    Color.WHITE
+            );
+
+            Paragraph title = new Paragraph(
+                    "HIRAMMATE",
+                    titleFont
+            );
+
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+
+            Paragraph subtitle = new Paragraph(
+                    "STUDENT LIABILITY STATEMENT",
+                    headingFont
+            );
+
+            subtitle.setAlignment(Element.ALIGN_CENTER);
+            document.add(subtitle);
+
+            document.add(new Paragraph(" ", normalFont));
+
+            document.add(
+                    new Paragraph(
+                            "Student Name: " +
+                            safeText(StudentSession.fullName),
+                            normalFont
+                    )
+            );
+
+            document.add(
+                    new Paragraph(
+                            "Student ID: " +
+                            safeText(StudentSession.studentId),
+                            normalFont
+                    )
+            );
+
+            document.add(
+                    new Paragraph(
+                            "Date Generated: " +
+                            LocalDateTime.now().format(
+                                    DateTimeFormatter.ofPattern(
+                                            "MMMM dd, yyyy hh:mm a"
+                                    )
+                            ),
+                            normalFont
+                    )
+            );
+
+            document.add(new Paragraph(" ", normalFont));
+
+            PdfPTable table = new PdfPTable(6);
+
+            table.setWidthPercentage(100);
+
+            table.setWidths(new float[]{
+                    1.2f, 2.0f, 2.4f, 1.4f, 1.5f, 1.2f
+            });
+
+            table.setHeaderRows(1);
+
+            Color headerBackground = new Color(181, 31, 54);
+
+            addPdfCell(
+                    table, "Reference", headerFont,
+                    headerBackground, Element.ALIGN_CENTER
+            );
+
+            addPdfCell(
+                    table, "Affected Item", headerFont,
+                    headerBackground, Element.ALIGN_CENTER
+            );
+
+            addPdfCell(
+                    table, "Reason", headerFont,
+                    headerBackground, Element.ALIGN_CENTER
+            );
+
+            addPdfCell(
+                    table, "Date Recorded", headerFont,
+                    headerBackground, Element.ALIGN_CENTER
+            );
+
+            addPdfCell(
+                    table, "Amount", headerFont,
+                    headerBackground, Element.ALIGN_CENTER
+            );
+
+            addPdfCell(
+                    table, "Status", headerFont,
+                    headerBackground, Element.ALIGN_CENTER
+            );
+
+            for (LiabilityRow row : liabilityList) {
+
+                addPdfCell(
+                        table, row.getReference(), smallFont,
+                        null, Element.ALIGN_CENTER
+                );
+
+                addPdfCell(
+                        table, row.getItem(), smallFont,
+                        null, Element.ALIGN_LEFT
+                );
+
+                addPdfCell(
+                        table, row.getReason(), smallFont,
+                        null, Element.ALIGN_LEFT
+                );
+
+                addPdfCell(
+                        table, row.getDate(), smallFont,
+                        null, Element.ALIGN_CENTER
+                );
+
+                addPdfCell(
+                        table, row.getAmount(), smallFont,
+                        null, Element.ALIGN_RIGHT
+                );
+
+                addPdfCell(
+                        table, row.getStatus(), smallFont,
+                        null, Element.ALIGN_CENTER
+                );
+            }
+
+            document.add(table);
+
+            document.add(new Paragraph(" ", normalFont));
+
+            document.add(
+                    new Paragraph(
+                            "Total Assessed Liabilities: " +
+                            formatCurrency(totalRecorded),
+                            headingFont
+                    )
+            );
+
+            document.add(
+                    new Paragraph(
+                            "Total Outstanding Balance: " +
+                            formatCurrency(totalOutstanding),
+                            headingFont
+                    )
+            );
+
+            document.add(new Paragraph(" ", normalFont));
+
+            document.add(
+                    new Paragraph(
+                            "This statement contains the liability records " +
+                            "associated with the student's account.",
+                            smallFont
+                    )
+            );
+
+            document.add(
+                    new Paragraph(
+                            "Generated by the HiramMate Student Portal.",
+                            smallFont
+                    )
+            );
+
+            document.close();
+
+            showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "Statement Downloaded",
+                    "Your liability statement was saved successfully:\n\n" +
+                    file.getAbsolutePath()
+            );
+
+        } catch (DocumentException | IOException e) {
+
+            e.printStackTrace();
+
+            if (document.isOpen()) {
+                document.close();
+            }
+
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "PDF Generation Error",
+                    "Unable to generate your liability statement.\n\n" +
+                    e.getMessage()
+            );
+        }
+    }
+
+    // ==========================================
+    // PDF TABLE CELL HELPER
+    // ==========================================
+
+    private void addPdfCell(
+            PdfPTable table,
+            String value,
+            Font font,
+            Color background,
+            int alignment
+    ) {
+
+        PdfPCell cell = new PdfPCell(
+                new Phrase(safeText(value), font)
+        );
+
+        cell.setPadding(7);
+        cell.setHorizontalAlignment(alignment);
+
+        if (background != null) {
+            cell.setBackgroundColor(background);
+        }
+
+        table.addCell(cell);
+    }
+
+    // ==========================================
+    // CONVERT DISPLAYED AMOUNT TO BIGDECIMAL
+    // ==========================================
+
+    private BigDecimal parseAmount(String amountText) {
+
+        if (amountText == null || amountText.isBlank()) {
+            return BigDecimal.ZERO;
+        }
+
+        try {
+
+            String cleanedAmount = amountText
+                    .replace("₱", "")
+                    .replace(",", "")
+                    .trim();
+
+            return new BigDecimal(cleanedAmount);
+
+        } catch (NumberFormatException e) {
+            return BigDecimal.ZERO;
+        }
+    }
+
+    // ==========================================
+    // SAFE TEXT
+    // ==========================================
+
+    private String safeText(String value) {
+
+        if (value == null || value.isBlank()) {
+            return "N/A";
+        }
+
+        return value;
     }
 
     // ==========================================
@@ -432,9 +776,9 @@ public class LiabilitiesController {
     // ==========================================
 
     private void showAlert(
-        Alert.AlertType type,
-        String title,
-        String message
+            Alert.AlertType type,
+            String title,
+            String message
     ) {
 
         Alert alert = new Alert(type);
@@ -444,21 +788,6 @@ public class LiabilitiesController {
         alert.setContentText(message);
 
         alert.showAndWait();
-    }
-
-    // ==========================================
-    // DOWNLOAD STATEMENT PLACEHOLDER
-    // ==========================================
-
-    @FXML
-    private void showComingSoon() {
-
-        showAlert(
-            Alert.AlertType.INFORMATION,
-            "HiramMate",
-            "The statement download feature will be implemented " +
-            "in a future update."
-        );
     }
 
     // ==========================================
@@ -499,31 +828,31 @@ public class LiabilitiesController {
         private final javafx.beans.property.SimpleStringProperty status;
 
         public LiabilityRow(
-            String reference,
-            String item,
-            String reason,
-            String date,
-            String amount,
-            String status
+                String reference,
+                String item,
+                String reason,
+                String date,
+                String amount,
+                String status
         ) {
 
             this.reference =
-                new javafx.beans.property.SimpleStringProperty(reference);
+                    new javafx.beans.property.SimpleStringProperty(reference);
 
             this.item =
-                new javafx.beans.property.SimpleStringProperty(item);
+                    new javafx.beans.property.SimpleStringProperty(item);
 
             this.reason =
-                new javafx.beans.property.SimpleStringProperty(reason);
+                    new javafx.beans.property.SimpleStringProperty(reason);
 
             this.date =
-                new javafx.beans.property.SimpleStringProperty(date);
+                    new javafx.beans.property.SimpleStringProperty(date);
 
             this.amount =
-                new javafx.beans.property.SimpleStringProperty(amount);
+                    new javafx.beans.property.SimpleStringProperty(amount);
 
             this.status =
-                new javafx.beans.property.SimpleStringProperty(status);
+                    new javafx.beans.property.SimpleStringProperty(status);
         }
 
         public String getReference() {

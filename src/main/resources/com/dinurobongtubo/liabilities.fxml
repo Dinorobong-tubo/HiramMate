@@ -125,9 +125,10 @@
 
                     <Region HBox.hgrow="ALWAYS"/>
 
-                    <Button text="Download Statement"
-                            onAction="#showComingSoon"
-                            styleClass="secondary-button"/>
+                   <Button text="Download Statement"
+        onAction="#downloadStatement"
+        styleClass="secondary-button"/>
+        
                 </HBox>
 
                 <!-- SUMMARY CARDS -->
