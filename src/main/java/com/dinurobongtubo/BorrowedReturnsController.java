@@ -318,29 +318,24 @@ public class BorrowedReturnsController {
 
         extensionButton.setOnAction(event -> showComingSoon());
 
-        Button actionButton = new Button("Pass QR");
-        actionButton.getStyleClass().add("secondary-button");
+       // CANCEL RESERVATION BUTTON
+if ("Reserved".equalsIgnoreCase(requestStatus)) {
 
-        if ("Reserved".equalsIgnoreCase(requestStatus)) {
+    Button cancelButton = new Button("Cancel reservation");
 
-            actionButton.setText("Cancel reservation");
+    cancelButton.getStyleClass().add("secondary-button");
 
-            actionButton.setOnAction(event ->
-                cancelReservation(requestId)
-            );
+    cancelButton.setOnAction(event ->
+        cancelReservation(requestId)
+    );
 
-        } else {
+    buttons.getChildren().add(cancelButton);
+}
 
-            actionButton.setOnAction(event ->
-                showComingSoon()
-            );
-        }
+// ADD EXTENSION BUTTON
+buttons.getChildren().add(extensionButton);
 
-        buttons.getChildren().addAll(
-            extensionButton,
-            actionButton
-        );
-
+ 
         // ASSEMBLE CARD
 
         card.getChildren().addAll(
