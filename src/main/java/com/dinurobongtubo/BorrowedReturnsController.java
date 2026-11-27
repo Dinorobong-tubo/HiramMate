@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -93,7 +94,8 @@ public class BorrowedReturnsController {
             "SELECT br.request_id, br.quantity, br.purpose, " +
             "br.pickup_date, br.due_date, br.status, " +
             "i.item_code, i.item_name, i.category, " +
-            "r.borrow_date, r.due_date AS record_due_date, " +
+            "r.record_id, r.borrow_date, " +
+            "r.due_date AS record_due_date, " +
             "r.status AS record_status " +
             "FROM borrow_requests br " +
             "INNER JOIN users u ON br.user_id = u.user_id " +
@@ -119,6 +121,8 @@ public class BorrowedReturnsController {
                 while (result.next()) {
 
                     int requestId = result.getInt("request_id");
+
+                    int recordId = result.getInt("record_id");
 
                     String itemCode = result.getString("item_code");
                     String itemName = result.getString("item_name");
@@ -156,6 +160,7 @@ public class BorrowedReturnsController {
 
                     VBox card = createBorrowedCard(
                         requestId,
+                        recordId,
                         itemCode,
                         itemName,
                         category,
@@ -164,7 +169,8 @@ public class BorrowedReturnsController {
                         pickupDate,
                         dueDate,
                         displayStatus,
-                        requestStatus
+                        requestStatus,
+                        recordStatus
                     );
 
                     borrowedItemsGrid.add(card, column, row);
@@ -186,6 +192,8 @@ public class BorrowedReturnsController {
 
         } catch (SQLException e) {
 
+            e.printStackTrace();
+
             showAlert(
                 Alert.AlertType.ERROR,
                 "Database Error",
@@ -201,6 +209,7 @@ public class BorrowedReturnsController {
 
     private VBox createBorrowedCard(
         int requestId,
+        int recordId,
         String itemCode,
         String itemName,
         String category,
@@ -209,7 +218,8 @@ public class BorrowedReturnsController {
         LocalDate pickupDate,
         LocalDate dueDate,
         String displayStatus,
-        String requestStatus
+        String requestStatus,
+        String recordStatus
     ) {
 
         VBox card = new VBox(14);
@@ -309,6 +319,8 @@ public class BorrowedReturnsController {
 
         HBox buttons = new HBox(10);
 
+        // EXTENSION BUTTON
+
         Button extensionButton =
             new Button("Request 2-day extension");
 
@@ -316,26 +328,37 @@ public class BorrowedReturnsController {
         extensionButton.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(extensionButton, Priority.ALWAYS);
 
-        extensionButton.setOnAction(event -> showComingSoon());
+        if (recordId > 0 &&
+            "Borrowed".equalsIgnoreCase(recordStatus)) {
 
-       // CANCEL RESERVATION BUTTON
-if ("Reserved".equalsIgnoreCase(requestStatus)) {
+            extensionButton.setOnAction(event ->
+                requestExtension(recordId)
+            );
 
-    Button cancelButton = new Button("Cancel reservation");
+        } else {
 
-    cancelButton.getStyleClass().add("secondary-button");
+            extensionButton.setText("Extension unavailable");
+            extensionButton.setDisable(true);
+        }
 
-    cancelButton.setOnAction(event ->
-        cancelReservation(requestId)
-    );
+        // CANCEL RESERVATION BUTTON
 
-    buttons.getChildren().add(cancelButton);
-}
+        if ("Reserved".equalsIgnoreCase(requestStatus)) {
 
-// ADD EXTENSION BUTTON
-buttons.getChildren().add(extensionButton);
+            Button cancelButton =
+                new Button("Cancel reservation");
 
- 
+            cancelButton.getStyleClass().add("secondary-button");
+
+            cancelButton.setOnAction(event ->
+                cancelReservation(requestId)
+            );
+
+            buttons.getChildren().add(cancelButton);
+        }
+
+        buttons.getChildren().add(extensionButton);
+
         // ASSEMBLE CARD
 
         card.getChildren().addAll(
@@ -349,6 +372,88 @@ buttons.getChildren().add(extensionButton);
     }
 
     // ==========================================
+    // REQUEST 2-DAY EXTENSION
+    // ==========================================
+
+    private void requestExtension(int recordId) {
+
+        Alert confirmation =
+            new Alert(Alert.AlertType.CONFIRMATION);
+
+        confirmation.setTitle("Request Extension");
+        confirmation.setHeaderText("Request a 2-day extension?");
+
+        confirmation.setContentText(
+            "Your request will be sent to the staff for approval."
+        );
+
+        ButtonType result =
+            confirmation.showAndWait().orElse(ButtonType.CANCEL);
+
+        if (result != ButtonType.OK) {
+            return;
+        }
+
+        String sql =
+            "INSERT INTO extension_requests " +
+            "(record_id, user_id, requested_days, request_date, status) " +
+            "SELECT r.record_id, r.user_id, 2, CURRENT_TIMESTAMP, 'Pending' " +
+            "FROM borrow_records r " +
+            "INNER JOIN users u ON r.user_id = u.user_id " +
+            "WHERE r.record_id = ? " +
+            "AND u.student_id = ? " +
+            "AND r.status = 'Borrowed' " +
+            "AND r.return_date IS NULL " +
+            "AND NOT EXISTS (" +
+            "SELECT 1 FROM extension_requests er " +
+            "WHERE er.record_id = r.record_id " +
+            "AND er.status = 'Pending'" +
+            ")";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement =
+                 connection.prepareStatement(sql)) {
+
+            statement.setInt(1, recordId);
+            statement.setString(2, StudentSession.studentId);
+
+            int rowsInserted = statement.executeUpdate();
+
+            if (rowsInserted > 0) {
+
+                showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "Request Submitted",
+                    "Your 2-day extension request has been submitted successfully.\n\n" +
+                    "Please wait for staff approval."
+                );
+
+                loadBorrowedItems();
+
+            } else {
+
+                showAlert(
+                    Alert.AlertType.WARNING,
+                    "Request Not Submitted",
+                    "You cannot submit this request.\n\n" +
+                    "The item may no longer be borrowed, or you may already have a pending extension request."
+                );
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+            showAlert(
+                Alert.AlertType.ERROR,
+                "Database Error",
+                "Unable to submit your extension request.\n\n" +
+                e.getMessage()
+            );
+        }
+    }
+
+    // ==========================================
     // CANCEL RESERVATION
     // ==========================================
 
@@ -359,6 +464,7 @@ buttons.getChildren().add(extensionButton);
 
         confirmation.setTitle("Cancel Reservation");
         confirmation.setHeaderText("Cancel this reservation?");
+
         confirmation.setContentText(
             "Are you sure you want to cancel this reservation?"
         );
@@ -366,6 +472,7 @@ buttons.getChildren().add(extensionButton);
         if (confirmation.showAndWait().isEmpty() ||
             confirmation.getResult().getButtonData() !=
                 ButtonBar.ButtonData.OK_DONE) {
+
             return;
         }
 
@@ -407,6 +514,8 @@ buttons.getChildren().add(extensionButton);
             }
 
         } catch (SQLException e) {
+
+            e.printStackTrace();
 
             showAlert(
                 Alert.AlertType.ERROR,
@@ -515,16 +624,6 @@ buttons.getChildren().add(extensionButton);
         alert.setContentText(message);
 
         alert.showAndWait();
-    }
-
-    @FXML
-    private void showComingSoon() {
-
-        showAlert(
-            Alert.AlertType.INFORMATION,
-            "HiramMate",
-            "This feature will be implemented in a future update."
-        );
     }
 
     // ==========================================
