@@ -8,29 +8,44 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.dinurobongtubo.StaffBorrowersReturnsController"
             stylesheets="@student-dashboard.css, @staff-borrowers-returns.css"
-            prefWidth="1200" prefHeight="760"
+            prefWidth="1200"
+            prefHeight="760"
             styleClass="app-background, page">
 
-    <!-- SIDEBAR (Matches StaffDashboard.fxml, StaffItems.fxml, StaffRequests.fxml & Student Views) -->
     <left>
-        <VBox prefWidth="255" minWidth="255" styleClass="sidebar">
+        <VBox prefWidth="255"
+              minWidth="255"
+              styleClass="sidebar">
 
-            <!-- BRAND HEADER -->
-            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand">
-                <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="brand-mark">
-                    <Label text="HM" styleClass="brand-mark-text" style="-fx-font-weight: 800; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
+            <HBox alignment="CENTER_LEFT"
+                  spacing="12"
+                  styleClass="brand">
+
+                <StackPane prefWidth="36"
+                           prefHeight="36"
+                           minWidth="36"
+                           minHeight="36"
+                           styleClass="brand-mark">
+
+                    <Label text="HM"
+                           styleClass="brand-mark-text"
+                           style="-fx-font-weight: 800; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
                 </StackPane>
+
                 <VBox spacing="1" alignment="CENTER_LEFT">
                     <Label text="HiramMate" styleClass="brand-name"/>
                     <Label text="STAFF PORTAL" styleClass="brand-caption"/>
                 </VBox>
             </HBox>
 
-            <Separator styleClass="sidebar-divider" mouseTransparent="true"/>
+            <Separator styleClass="sidebar-divider"
+                       mouseTransparent="true"/>
 
-            <!-- NAVIGATION MENU -->
             <VBox spacing="6" styleClass="navigation">
-                <Label text="STAFF MENU" styleClass="menu-heading" mouseTransparent="true"/>
+
+                <Label text="STAFF MENU"
+                       styleClass="menu-heading"
+                       mouseTransparent="true"/>
 
                 <Button text="  ⊞   Dashboard"
                         onAction="#showDashboard"
@@ -60,21 +75,34 @@
 
             <Region VBox.vgrow="ALWAYS" mouseTransparent="true"/>
 
-            <Separator styleClass="sidebar-divider" mouseTransparent="true"/>
+            <Separator styleClass="sidebar-divider"
+                       mouseTransparent="true"/>
 
-            <!-- STAFF PROFILE FOOTER -->
             <VBox spacing="8" styleClass="profile-container">
-                <Label text="SIGNED IN AS" styleClass="menu-heading" mouseTransparent="true"/>
 
-                <HBox spacing="11" alignment="CENTER_LEFT" styleClass="profile-card">
-                    <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="profile-avatar">
+                <Label text="SIGNED IN AS"
+                       styleClass="menu-heading"
+                       mouseTransparent="true"/>
+
+                <HBox spacing="11"
+                      alignment="CENTER_LEFT"
+                      styleClass="profile-card">
+
+                    <StackPane prefWidth="36"
+                               prefHeight="36"
+                               minWidth="36"
+                               minHeight="36"
+                               styleClass="profile-avatar">
+
                         <Label text="MS" styleClass="profile-initials"/>
                     </StackPane>
 
                     <VBox spacing="2" HBox.hgrow="ALWAYS">
+
                         <Label fx:id="staffNameLabel"
                                text="Staff Name"
                                styleClass="profile-name"/>
+
                         <Label fx:id="staffIdLabel"
                                text="Staff ID • Active"
                                styleClass="profile-details"
@@ -87,102 +115,195 @@
                         maxWidth="Infinity"
                         styleClass="logout-button"/>
             </VBox>
-
         </VBox>
     </left>
 
     <center>
-        <VBox spacing="22" styleClass="main-content">
-            <padding>
-                <Insets top="30" right="32" bottom="30" left="32"/>
-            </padding>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="transparent-scroll">
 
-            <VBox spacing="6">
-                <Label text="Borrowers &amp; Returns"
-                       styleClass="page-title"/>
-                <Label text="Monitor active borrowers and process returned items."
-                       styleClass="page-subtitle"/>
-            </VBox>
+            <content>
+                <VBox spacing="22" styleClass="main-content">
 
-            <HBox spacing="16">
-                <VBox spacing="8" styleClass="summary-card">
-                    <Label text="ACTIVE BORROWERS" styleClass="summary-label"/>
-                    <Label fx:id="activeCountLabel" text="0"
-                           styleClass="summary-number"/>
-                </VBox>
+                    <padding>
+                        <Insets top="30"
+                                right="32"
+                                bottom="30"
+                                left="32"/>
+                    </padding>
 
-                <VBox spacing="8" styleClass="summary-card">
-                    <Label text="OVERDUE RETURNS" styleClass="summary-label"/>
-                    <Label fx:id="overdueCountLabel" text="0"
-                           styleClass="summary-number-danger"/>
-                </VBox>
-            </HBox>
+                    <VBox spacing="6">
+                        <Label text="Borrowers &amp; Returns"
+                               styleClass="page-title"/>
 
-            <VBox spacing="14" styleClass="table-card">
-                <HBox alignment="CENTER_LEFT" spacing="12">
-                    <VBox spacing="4" HBox.hgrow="ALWAYS">
-                        <Label text="Borrow Records" styleClass="section-title"/>
-                        <Label text="Select a record to process its return."
+                        <Label text="Monitor active borrowers and process returned items."
                                styleClass="page-subtitle"/>
                     </VBox>
 
-                    <Button text="Refresh" onAction="#loadBorrowRecords"
-                            styleClass="secondary-button"/>
-                </HBox>
+                    <!-- SUMMARY CARDS -->
+                    <HBox spacing="16">
 
-                <HBox spacing="12" alignment="CENTER_LEFT">
-                    <TextField fx:id="searchField"
-                               promptText="Search borrower, student ID, item..."
-                               HBox.hgrow="ALWAYS"/>
+                        <VBox spacing="8" styleClass="summary-card">
+                            <Label text="ACTIVE BORROWERS"
+                                   styleClass="summary-label"/>
 
-                    <ComboBox fx:id="filterComboBox"
-                              prefWidth="160"
-                              promptText="Filter status"/>
-                </HBox>
+                            <Label fx:id="activeCountLabel"
+                                   text="0"
+                                   styleClass="summary-number"/>
+                        </VBox>
 
-                <TableView fx:id="borrowersTable"
-                           VBox.vgrow="ALWAYS"
-                           prefHeight="390">
+                        <VBox spacing="8" styleClass="summary-card">
+                            <Label text="OVERDUE RETURNS"
+                                   styleClass="summary-label"/>
 
-                    <columns>
-                        <TableColumn fx:id="recordIdColumn"
-                                     text="Record ID" prefWidth="85"/>
+                            <Label fx:id="overdueCountLabel"
+                                   text="0"
+                                   styleClass="summary-number-danger"/>
+                        </VBox>
+                    </HBox>
 
-                        <TableColumn fx:id="borrowerColumn"
-                                     text="Borrower" prefWidth="145"/>
+                    <!-- APPROVED REQUESTS / PICKUP -->
+                    <VBox spacing="14" styleClass="table-card">
 
-                        <TableColumn fx:id="studentIdColumn"
-                                     text="Student ID" prefWidth="105"/>
+                        <HBox alignment="CENTER_LEFT" spacing="12">
 
-                        <TableColumn fx:id="itemColumn"
-                                     text="Item" prefWidth="140"/>
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="Approved Requests - Ready for Pickup"
+                                       styleClass="section-title"/>
 
-                        <TableColumn fx:id="quantityColumn"
-                                     text="Qty" prefWidth="55"/>
+                                <Label text="Confirm when a student physically receives the item."
+                                       styleClass="page-subtitle"/>
+                            </VBox>
 
-                        <TableColumn fx:id="borrowDateColumn"
-                                     text="Borrow Date" prefWidth="105"/>
+                            <Button text="Refresh"
+                                    onAction="#loadApprovedRequests"
+                                    styleClass="secondary-button"/>
+                        </HBox>
 
-                        <TableColumn fx:id="dueDateColumn"
-                                     text="Due Date" prefWidth="105"/>
+                        <TableView fx:id="pickupRequestsTable"
+                                   prefHeight="200">
 
-                        <TableColumn fx:id="statusColumn"
-                                     text="Status" prefWidth="95"/>
-                    </columns>
+                            <columns>
+                                <TableColumn fx:id="pickupRequestIdColumn"
+                                             text="Request ID"
+                                             prefWidth="90"/>
 
-                    <placeholder>
-                        <Label text="No borrow records found."/>
-                    </placeholder>
-                </TableView>
+                                <TableColumn fx:id="pickupStudentColumn"
+                                             text="Student"
+                                             prefWidth="170"/>
 
-                <HBox alignment="CENTER_RIGHT" spacing="12">
-                    <Label text="Select a record before processing a return."
-                           styleClass="helper-text"/>
-                    <Button text="Process Return"
-                            onAction="#processReturn"
-                            styleClass="primary-button"/>
-                </HBox>
-            </VBox>
-        </VBox>
+                                <TableColumn fx:id="pickupItemColumn"
+                                             text="Item"
+                                             prefWidth="170"/>
+
+                                <TableColumn fx:id="pickupQuantityColumn"
+                                             text="Quantity"
+                                             prefWidth="80"/>
+
+                                <TableColumn fx:id="pickupDueDateColumn"
+                                             text="Due Date"
+                                             prefWidth="120"/>
+                            </columns>
+
+                            <placeholder>
+                                <Label text="No approved requests waiting for pickup."/>
+                            </placeholder>
+                        </TableView>
+
+                        <HBox alignment="CENTER_RIGHT">
+                            <Button text="Confirm Pickup"
+                                    onAction="#confirmPickup"
+                                    styleClass="primary-button"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- BORROW RECORDS -->
+                    <VBox spacing="14" styleClass="table-card">
+
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="Borrow Records"
+                                       styleClass="section-title"/>
+
+                                <Label text="Select a record to process its return."
+                                       styleClass="page-subtitle"/>
+                            </VBox>
+
+                            <Button text="Refresh"
+                                    onAction="#loadBorrowRecords"
+                                    styleClass="secondary-button"/>
+                        </HBox>
+
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+
+                            <TextField fx:id="searchField"
+                                       promptText="Search borrower, student ID, item..."
+                                       HBox.hgrow="ALWAYS"/>
+
+                            <ComboBox fx:id="filterComboBox"
+                                      prefWidth="160"
+                                      promptText="Filter status"/>
+                        </HBox>
+
+                        <TableView fx:id="borrowersTable"
+                                   VBox.vgrow="ALWAYS"
+                                   prefHeight="390">
+
+                            <columns>
+                                <TableColumn fx:id="recordIdColumn"
+                                             text="Record ID"
+                                             prefWidth="85"/>
+
+                                <TableColumn fx:id="borrowerColumn"
+                                             text="Borrower"
+                                             prefWidth="145"/>
+
+                                <TableColumn fx:id="studentIdColumn"
+                                             text="Student ID"
+                                             prefWidth="105"/>
+
+                                <TableColumn fx:id="itemColumn"
+                                             text="Item"
+                                             prefWidth="140"/>
+
+                                <TableColumn fx:id="quantityColumn"
+                                             text="Qty"
+                                             prefWidth="55"/>
+
+                                <TableColumn fx:id="borrowDateColumn"
+                                             text="Borrow Date"
+                                             prefWidth="105"/>
+
+                                <TableColumn fx:id="dueDateColumn"
+                                             text="Due Date"
+                                             prefWidth="105"/>
+
+                                <TableColumn fx:id="statusColumn"
+                                             text="Status"
+                                             prefWidth="95"/>
+                            </columns>
+
+                            <placeholder>
+                                <Label text="No borrow records found."/>
+                            </placeholder>
+                        </TableView>
+
+                        <HBox alignment="CENTER_RIGHT" spacing="12">
+
+                            <Label text="Select a record before processing a return."
+                                   styleClass="helper-text"/>
+
+                            <Button text="Process Return"
+                                    onAction="#processReturn"
+                                    styleClass="primary-button"/>
+                        </HBox>
+                    </VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
     </center>
+
 </BorderPane>
