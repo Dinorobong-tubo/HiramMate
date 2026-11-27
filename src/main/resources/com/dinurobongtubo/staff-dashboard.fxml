@@ -22,26 +22,46 @@
             stylesheets="@staff-dashboard.css, @student-dashboard.css"
             styleClass="app-background, dashboard-root">
 
-    <!-- SIDEBAR (100% Identical to all Staff & Student Views) -->
+    <!-- SIDEBAR -->
     <left>
-        <VBox prefWidth="255" minWidth="255" styleClass="sidebar">
+        <VBox prefWidth="255"
+              minWidth="255"
+              styleClass="sidebar">
 
             <!-- BRAND HEADER -->
-            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand">
-                <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="brand-mark">
-                    <Label text="HM" styleClass="brand-mark-text" style="-fx-font-weight: 800; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
+            <HBox alignment="CENTER_LEFT"
+                  spacing="12"
+                  styleClass="brand">
+
+                <StackPane prefWidth="36"
+                           prefHeight="36"
+                           minWidth="36"
+                           minHeight="36"
+                           styleClass="brand-mark">
+
+                    <Label text="HM"
+                           styleClass="brand-mark-text"
+                           style="-fx-font-weight: 800; -fx-font-size: 14px; -fx-text-fill: #FFFFFF;"/>
                 </StackPane>
+
                 <VBox spacing="1" alignment="CENTER_LEFT">
-                    <Label text="HiramMate" styleClass="brand-name"/>
-                    <Label text="STAFF PORTAL" styleClass="brand-caption"/>
+                    <Label text="HiramMate"
+                           styleClass="brand-name"/>
+
+                    <Label text="STAFF PORTAL"
+                           styleClass="brand-caption"/>
                 </VBox>
             </HBox>
 
-            <Separator styleClass="sidebar-divider" mouseTransparent="true"/>
+            <Separator styleClass="sidebar-divider"
+                       mouseTransparent="true"/>
 
             <!-- NAVIGATION MENU -->
             <VBox spacing="6" styleClass="navigation">
-                <Label text="STAFF MENU" styleClass="menu-heading" mouseTransparent="true"/>
+
+                <Label text="STAFF MENU"
+                       styleClass="menu-heading"
+                       mouseTransparent="true"/>
 
                 <Button text="  ⊞   Dashboard"
                         onAction="#showDashboard"
@@ -70,23 +90,39 @@
                         styleClass="nav-button"/>
             </VBox>
 
-            <Region VBox.vgrow="ALWAYS" mouseTransparent="true"/>
+            <Region VBox.vgrow="ALWAYS"
+                    mouseTransparent="true"/>
 
-            <Separator styleClass="sidebar-divider" mouseTransparent="true"/>
+            <Separator styleClass="sidebar-divider"
+                       mouseTransparent="true"/>
 
             <!-- STAFF PROFILE FOOTER -->
             <VBox spacing="8" styleClass="profile-container">
-                <Label text="SIGNED IN AS" styleClass="menu-heading" mouseTransparent="true"/>
 
-                <HBox spacing="11" alignment="CENTER_LEFT" styleClass="profile-card">
-                    <StackPane prefWidth="36" prefHeight="36" minWidth="36" minHeight="36" styleClass="profile-avatar">
-                        <Label text="MS" styleClass="profile-initials"/>
+                <Label text="SIGNED IN AS"
+                       styleClass="menu-heading"
+                       mouseTransparent="true"/>
+
+                <HBox spacing="11"
+                      alignment="CENTER_LEFT"
+                      styleClass="profile-card">
+
+                    <StackPane prefWidth="36"
+                               prefHeight="36"
+                               minWidth="36"
+                               minHeight="36"
+                               styleClass="profile-avatar">
+
+                        <Label text="MS"
+                               styleClass="profile-initials"/>
                     </StackPane>
 
                     <VBox spacing="2" HBox.hgrow="ALWAYS">
+
                         <Label fx:id="staffNameLabel"
                                text="Staff Member"
                                styleClass="profile-name"/>
+
                         <Label fx:id="staffIdLabel"
                                text="Staff ID • Active"
                                styleClass="profile-details"
@@ -99,153 +135,239 @@
                         maxWidth="Infinity"
                         styleClass="logout-button"/>
             </VBox>
-
         </VBox>
     </left>
 
     <!-- MAIN DASHBOARD -->
     <center>
-        <VBox spacing="20" styleClass="main-area">
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="borrower-scroll">
 
-            <padding>
-                <Insets top="28" right="30" bottom="25" left="30"/>
-            </padding>
+            <content>
+                <VBox spacing="20" styleClass="main-area">
 
-            <!-- HEADER -->
-            <HBox alignment="CENTER_LEFT" spacing="20">
-                <Label text="Staff Dashboard"
-                       styleClass="page-title"
-                       HBox.hgrow="ALWAYS"/>
+                    <padding>
+                        <Insets top="28"
+                                right="30"
+                                bottom="25"
+                                left="30"/>
+                    </padding>
 
-                <TextField fx:id="searchField"
-                           promptText="Search items or borrowers"
-                           prefWidth="280"
-                           styleClass="search-field"/>
-            </HBox>
+                    <!-- HEADER -->
+                    <HBox alignment="CENTER_LEFT" spacing="20">
 
-            <!-- SUMMARY CARDS -->
-            <HBox spacing="14" styleClass="stats-row">
+                        <Label text="Staff Dashboard"
+                               styleClass="page-title"
+                               HBox.hgrow="ALWAYS"/>
 
-                <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
-                    <Label text="Available" styleClass="stat-label"/>
-                    <Label fx:id="availableLabel"
-                           text="0"
-                           styleClass="stat-value"/>
+                        <TextField fx:id="searchField"
+                                   promptText="Search items or borrowers"
+                                   prefWidth="280"
+                                   styleClass="search-field"/>
+                    </HBox>
+
+                    <!-- SUMMARY CARDS -->
+                    <HBox spacing="14" styleClass="stats-row">
+
+                        <VBox HBox.hgrow="ALWAYS"
+                              styleClass="stat-card">
+
+                            <Label text="Available"
+                                   styleClass="stat-label"/>
+
+                            <Label fx:id="availableLabel"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                        </VBox>
+
+                        <VBox HBox.hgrow="ALWAYS"
+                              styleClass="stat-card">
+
+                            <Label text="Borrowed"
+                                   styleClass="stat-label"/>
+
+                            <Label fx:id="borrowedLabel"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                        </VBox>
+
+                        <VBox HBox.hgrow="ALWAYS"
+                              styleClass="stat-card">
+
+                            <Label text="Overdue"
+                                   styleClass="stat-label"/>
+
+                            <Label fx:id="overdueLabel"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                        </VBox>
+
+                        <VBox HBox.hgrow="ALWAYS"
+                              styleClass="stat-card">
+
+                            <Label text="Reserved"
+                                   styleClass="stat-label"/>
+
+                            <Label fx:id="reservedLabel"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                        </VBox>
+
+                        <VBox HBox.hgrow="ALWAYS"
+                              styleClass="stat-card">
+
+                            <Label text="Pending"
+                                   styleClass="stat-label"/>
+
+                            <Label fx:id="pendingLabel"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- INCOMING BORROWER REQUESTS -->
+                    <VBox spacing="12" styleClass="section">
+
+                        <HBox alignment="CENTER_LEFT">
+
+                            <Label text="Incoming borrower requests"
+                                   styleClass="section-title"
+                                   HBox.hgrow="ALWAYS"/>
+
+                            <Label text="Review and process student requests"
+                                   styleClass="section-hint"/>
+                        </HBox>
+
+                        <TableView fx:id="requestsTable"
+                                   prefHeight="250"
+                                   styleClass="requests-table">
+
+                            <columns>
+
+                                <TableColumn fx:id="borrowerColumn"
+                                             text="Borrower (Student)"
+                                             prefWidth="220"/>
+
+                                <TableColumn fx:id="itemColumn"
+                                             text="Requested Item"
+                                             prefWidth="170"/>
+
+                                <TableColumn fx:id="dueDateColumn"
+                                             text="Due Date"
+                                             prefWidth="105"/>
+
+                                <TableColumn fx:id="statusColumn"
+                                             text="Status"
+                                             prefWidth="110"/>
+
+                                <TableColumn fx:id="actionColumn"
+                                             text="Staff Decision"
+                                             prefWidth="170"/>
+                            </columns>
+
+                            <placeholder>
+                                <Label text="No borrower requests found."
+                                       styleClass="empty-message"/>
+                            </placeholder>
+                        </TableView>
+                    </VBox>
+
+                    <!-- EXTENSION REQUESTS -->
+                    <VBox spacing="12" styleClass="section">
+
+                        <HBox alignment="CENTER_LEFT"
+                              spacing="8">
+
+                            <Label text="↻"
+                                   styleClass="live-indicator"/>
+
+                            <Label text="Extension Requests"
+                                   styleClass="section-title"
+                                   HBox.hgrow="ALWAYS"/>
+
+                            <Label text="Review student due-date extensions"
+                                   styleClass="section-hint"/>
+                        </HBox>
+
+                        <TableView fx:id="extensionRequestsTable"
+                                   prefHeight="200"
+                                   styleClass="requests-table">
+
+                            <columns>
+
+                                <TableColumn fx:id="extensionStudentColumn"
+                                             text="Student"
+                                             prefWidth="200"/>
+
+                                <TableColumn fx:id="extensionItemColumn"
+                                             text="Borrowed Item"
+                                             prefWidth="150"/>
+
+                                <TableColumn fx:id="extensionDaysColumn"
+                                             text="Requested Days"
+                                             prefWidth="110"/>
+
+                                <TableColumn fx:id="extensionDateColumn"
+                                             text="Request Date"
+                                             prefWidth="170"/>
+
+                                <TableColumn fx:id="extensionStatusColumn"
+                                             text="Status"
+                                             prefWidth="100"/>
+
+                                <TableColumn fx:id="extensionActionColumn"
+                                             text="Staff Decision"
+                                             prefWidth="160"/>
+                            </columns>
+
+                            <placeholder>
+                                <Label text="No extension requests found."
+                                       styleClass="empty-message"/>
+                            </placeholder>
+                        </TableView>
+                    </VBox>
+
+                    <!-- ACTIVE BORROWERS -->
+                    <VBox spacing="12" styleClass="section">
+
+                        <HBox alignment="CENTER_LEFT"
+                              spacing="8">
+
+                            <Label text="●"
+                                   styleClass="live-indicator"/>
+
+                            <Label text="Active borrowers monitor"
+                                   styleClass="section-title"
+                                   HBox.hgrow="ALWAYS"/>
+
+                            <Button text="Open Full Monitor →"
+                                    onAction="#showBorrowersReturns"
+                                    styleClass="outline-button"/>
+                        </HBox>
+
+                        <ScrollPane fitToWidth="true"
+                                    hbarPolicy="NEVER"
+                                    prefHeight="190"
+                                    styleClass="borrower-scroll">
+
+                            <content>
+                                <HBox fx:id="activeBorrowersContainer"
+                                      spacing="14"
+                                      styleClass="borrower-container"/>
+                            </content>
+                        </ScrollPane>
+
+                        <Label fx:id="borrowerEmptyLabel"
+                               text="No active borrowers at the moment."
+                               styleClass="empty-message"
+                               visible="false"
+                               managed="false"/>
+                    </VBox>
+
                 </VBox>
-
-                <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
-                    <Label text="Borrowed" styleClass="stat-label"/>
-                    <Label fx:id="borrowedLabel"
-                           text="0"
-                           styleClass="stat-value"/>
-                </VBox>
-
-                <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
-                    <Label text="Overdue" styleClass="stat-label"/>
-                    <Label fx:id="overdueLabel"
-                           text="0"
-                           styleClass="stat-value"/>
-                </VBox>
-
-                <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
-                    <Label text="Reserved" styleClass="stat-label"/>
-                    <Label fx:id="reservedLabel"
-                           text="0"
-                           styleClass="stat-value"/>
-                </VBox>
-
-                <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
-                    <Label text="Pending" styleClass="stat-label"/>
-                    <Label fx:id="pendingLabel"
-                           text="0"
-                           styleClass="stat-value"/>
-                </VBox>
-
-            </HBox>
-
-            <!-- INCOMING REQUESTS -->
-            <VBox spacing="12" styleClass="section">
-
-                <HBox alignment="CENTER_LEFT">
-                    <Label text="Incoming borrower requests"
-                           styleClass="section-title"
-                           HBox.hgrow="ALWAYS"/>
-
-                    <Label text="Review and process student requests"
-                           styleClass="section-hint"/>
-                </HBox>
-
-                <TableView fx:id="requestsTable"
-                           prefHeight="250"
-                           styleClass="requests-table">
-
-                    <columns>
-                        <TableColumn fx:id="borrowerColumn"
-                                     text="Borrower (Student)"
-                                     prefWidth="220"/>
-
-                        <TableColumn fx:id="itemColumn"
-                                     text="Requested Item"
-                                     prefWidth="170"/>
-
-                        <TableColumn fx:id="dueDateColumn"
-                                     text="Due Date"
-                                     prefWidth="105"/>
-
-                        <TableColumn fx:id="statusColumn"
-                                     text="Status"
-                                     prefWidth="110"/>
-
-                        <TableColumn fx:id="actionColumn"
-                                     text="Staff Decision"
-                                     prefWidth="170"/>
-                    </columns>
-
-                    <placeholder>
-                        <Label text="No borrower requests found."
-                               styleClass="empty-message"/>
-                    </placeholder>
-
-                </TableView>
-            </VBox>
-
-            <!-- ACTIVE BORROWERS -->
-            <VBox spacing="12" styleClass="section">
-
-                <HBox alignment="CENTER_LEFT" spacing="8">
-                    <Label text="●" styleClass="live-indicator"/>
-
-                    <Label text="Active borrowers monitor"
-                           styleClass="section-title"
-                           HBox.hgrow="ALWAYS"/>
-
-                    <Button text="Open Full Monitor →"
-                            onAction="#showBorrowersReturns"
-                            styleClass="outline-button"/>
-                </HBox>
-
-                <ScrollPane fitToWidth="true"
-                            hbarPolicy="NEVER"
-                            prefHeight="190"
-                            styleClass="borrower-scroll">
-
-                    <content>
-                        <HBox fx:id="activeBorrowersContainer"
-                              spacing="14"
-                              styleClass="borrower-container"/>
-                    </content>
-
-                </ScrollPane>
-
-                <Label fx:id="borrowerEmptyLabel"
-                       text="No active borrowers at the moment."
-                       styleClass="empty-message"
-                       visible="false"
-                       managed="false"/>
-
-            </VBox>
-
-        </VBox>
+            </content>
+        </ScrollPane>
     </center>
 
 </BorderPane>
